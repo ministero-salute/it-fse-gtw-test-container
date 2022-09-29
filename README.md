@@ -7,6 +7,15 @@ In questo repository è presente un file `docker-compose` che consente di avviar
 * docker-compose
 * 16 GiB di RAM
 
+## Preparazione:
+
+Per prima cosa è **necessario** creare un file `.env` copiando il file `.env-sample`.
+
+All'interno del file è necessario inizializzare il `BASE_URL` da dove scaricare il codice dei microservizi del gateway.
+Ad esempio:
+
+    BASE_URL="https://github.com/ministero-salute/"
+
 ## Avvio:
 
 Per avviare i container che compongono il gateway è sufficiente dalla directory contenente il file `docker-compose.yaml` lanciare il comando 
