@@ -142,8 +142,11 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+  
   it-fse-gtw-publisher:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-publisher.git
       BRANCH: feature/UAT_200622
@@ -153,8 +156,12 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+
+
   it-fse-gtw-validator:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-validator.git
       BRANCH: feature/UAT_200622
@@ -164,8 +171,12 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+
+
   it-fse-gtw-dispatcher:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-dispatcher.git
       BRANCH: feature/UAT_200622
@@ -175,8 +186,12 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+
+
   it-fse-gtw-fhir-mapping:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-fhir-mapping.git
       BRANCH: feature/UAT_200622
@@ -186,8 +201,12 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+
+
   it-fse-gtw-status-check:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-status-check.git
       BRANCH: feature/UAT_200622
@@ -197,9 +216,12 @@ services:
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
+
  
   it-fse-gtw-rules-manager:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-rules-manager.git
       BRANCH: feature/UAT_200622
@@ -212,6 +234,8 @@ services:
  
   it-fse-gtw-status-manager:
     image: it-fse-gtw-runner
+    build:
+      context: ./it-fse-gtw-runner/
     environment:
       URL: ${BASE_URL}/it-fse-gtw-status-manager.git
       BRANCH: feature/UAT_200622
