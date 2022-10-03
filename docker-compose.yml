@@ -1,101 +1,12 @@
 version: '3.7'
 services:
-
-  # The 'setup' service runs a one-off script which initializes the
-  # 'logstash_internal' and 'kibana_system' users inside Elasticsearch with the
-  # values of the passwords defined in the '.env' file.
-  #
-  # This task is only performed during the *initial* startup of the stack. On all
-  # subsequent runs, the service simply returns immediately, without performing
-  # any modification to existing users.
-  setup:
-    build:
-      context: setup/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
-    init: true
-    volumes:
-      - setup:/state:Z
-    environment:
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    networks:
-      - elk
-
-  elasticsearch:
-    build:
-      context: elasticsearch/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
-    volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch:/usr/share/elasticsearch/data:z
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx512m
-      # Bootstrap password.
-      # Used to initialize the keystore during the initial startup of
-      # Elasticsearch. Ignored on subsequent runs.
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
-      cluster.routing.allocation.disk.threshold_enabled: "true"
-      cluster.routing.allocation.disk.watermark.low: "2gb"
-      cluster.routing.allocation.disk.watermark.high: "1gb"
-      cluster.routing.allocation.disk.watermark.flood_stage: "512mb"
-    networks:
-      - elk
-
-  logstash:
-    build:
-      context: logstash/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
-    volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
-    ports:
-      - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
-      - "9600:9600"
-    environment:
-      LS_JAVA_OPTS: -Xms256m -Xmx256m
-      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
-
-  kibana:
-    build:
-      context: kibana/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
-    volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
-    ports:
-      - "5601:5601"
-    environment:
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
-
   mongo:
     ports:
       - '27888:27017'
-    #container_name: mongo
     image: 'docker.io/mongo:4.2'
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    
-
+  
   redis:
     image: docker.io/redis
     command: redis-server --requirepass verysecretpwd
@@ -129,105 +40,98 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
   
 #MICROSERVIZI
+  it-fse-srv-log-ingestion:
+    image: it-fse-gtw-runner                                                                                                                                                                           
+    build:
+      context: ./it-fse-gtw-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-log-ingestion.git
+      BRANCH: feat/sprint1
+      PORT: 8015
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "host"
+  
   it-fse-gtw-indexer:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-indexer.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-indexer.git
       BRANCH: feature/UAT_200622
       PORT: 8015
-  #  ports:
-  #    - 8015
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
   
-  it-fse-gtw-publisher:
+  it-fse-gtw-publisher:                                                                                                         
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-publisher.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-publisher.git
       BRANCH: feature/UAT_200622
       PORT: 8016
-  #  ports:
- #    - 8016
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
-
 
   it-fse-gtw-validator:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-validator.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-validator.git
       BRANCH: feature/UAT_200622
       PORT: 8012
-  #  ports:
-  #    - 8012
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
-
 
   it-fse-gtw-dispatcher:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-dispatcher.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-dispatcher.git
       BRANCH: feature/UAT_200622
       PORT: 8010
-  #  ports:
-   #   - 8010
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
-
 
   it-fse-gtw-fhir-mapping:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-fhir-mapping.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping.git
       BRANCH: feature/UAT_200622
       PORT: 8014
-  #  ports:
-   #   - 8014
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
-
 
   it-fse-gtw-status-check:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-status-check.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-status-check.git
       BRANCH: feature/UAT_200622
       PORT: 8017
-  #  ports:
-   #   - 8017
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
 
- 
   it-fse-gtw-rules-manager:
     image: it-fse-gtw-runner
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-rules-manager.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-rules-manager.git
       BRANCH: feature/UAT_200622
       PORT: 8011
-  #  ports:
-  #    - 8011
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
@@ -237,11 +141,9 @@ services:
     build:
       context: ./it-fse-gtw-runner/
     environment:
-      URL: ${BASE_URL}/it-fse-gtw-status-manager.git
+      URL: ${REPO_BASE_URL}/it-fse-gtw-status-manager.git
       BRANCH: feature/UAT_200622
       PORT: 8013
-  #  ports:
-  #    - 8013
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "host"
@@ -250,7 +152,6 @@ networks:
  elk:
    driver: bridge
  
-
 volumes:
  setup:
  elasticsearch:
