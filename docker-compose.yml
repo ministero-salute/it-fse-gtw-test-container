@@ -46,7 +46,7 @@ services:
       context: ./it-fse-gtw-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-log-ingestion.git
-      BRANCH: feat/sprint1
+      BRANCH: feature/sprint1
       PORT: 8018
     volumes: 
       - mvn-cache:/root/.m2
