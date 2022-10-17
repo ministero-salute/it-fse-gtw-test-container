@@ -11,10 +11,10 @@ In questo repository è presente un file `docker-compose` che consente di avviar
 
 Per prima cosa è **necessario** creare un file `.env` copiando il file `.env-sample`.
 
-All'interno del file è necessario inizializzare il `BASE_URL` da dove scaricare il codice dei microservizi del gateway.
+All'interno del file è necessario inizializzare il `REPO_BASE_URL` da dove scaricare il codice dei microservizi del gateway.
 Ad esempio:
 
-    BASE_URL="https://github.com/ministero-salute/"
+    REPO_BASE_URL="https://github.com/ministero-salute/"
 
 ## Avvio:
 
