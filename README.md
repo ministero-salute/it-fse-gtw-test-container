@@ -55,3 +55,10 @@ Se un container non fosse in esecuzione (ad esempio a causa di un out of memory)
     docker start NOME_CONTAINER
 
 Una volta avviato sarà possibile utilizzare come endpoint di collegamento `http://localhost:8010` corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi.
+
+## Test:
+* Visual Studio Code
+* Estensione REST Client
+  
+Per poter effettuare i test è **necessario** creare un file `.env` copiando il file `.env-sample` presente nella folder `tests`
+Una volta installata l'estesione `REST Client` comparirà sopra ogni chiamata il tasto `Send Request`
