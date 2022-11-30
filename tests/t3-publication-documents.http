@@ -1,0 +1,202 @@
+#############################################################################
+###                     Pubblicazione documenti CDA                       ###
+#############################################################################
+
+
+@identificativoDoc = 2.16.840.1.113883.2.9.2.110.4.4^12345
+
+
+#############################################################################
+# 1.0) Validazione Documento LAB
+# EXPECTED: 201 OK
+#############################################################################
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VALIDATION"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/LAB.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 1.1) Pubblicazione Documento LAB
+# EXPECTED: 201 OK
+#############################################################################
+# @name publication
+POST {{$dotenv BASE_URL}}:8010/v1/documents 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "tipologiaStruttura": "Ospedale",
+  "attiCliniciRegoleAccesso": [ "PUBLICPOL" ],
+  "tipoDocumentoLivAlto": "WOR",
+  "assettoOrganizzativo": "AD_PSC001",
+  "conservazioneANorma": "string",
+  "tipoAttivitaClinica": "PHR",
+  "identificativoSottomissione": "string",
+  "healthDataFormat": "CDA", 
+  "mode": "ATTACHMENT", 
+  "identificativoDoc": "{{identificativoDoc}}",
+  "identificativoRep": "REPOSITORY",
+  "priorita": true
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/LAB.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 2.0) Validazione Documento LDO
+# EXPECTED: 201 OK
+#############################################################################
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_LDO}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VALIDATION"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LDO.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/LDO.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 2.1) Pubblicazione Documento LDO
+# EXPECTED: 201 OK
+#############################################################################
+# @name publication
+POST {{$dotenv BASE_URL}}:8010/v1/documents 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_LDO}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "tipologiaStruttura": "Ospedale",
+  "attiCliniciRegoleAccesso": [ "PUBLICPOL" ],
+  "tipoDocumentoLivAlto": "WOR",
+  "assettoOrganizzativo": "AD_PSC001",
+  "conservazioneANorma": "string",
+  "tipoAttivitaClinica": "PHR",
+  "identificativoSottomissione": "string",
+  "healthDataFormat": "CDA", 
+  "mode": "ATTACHMENT", 
+  "identificativoDoc": "{{identificativoDoc}}",
+  "identificativoRep": "REPOSITORY",
+  "priorita": true
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LDO.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/LDO.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 3.0) Validazione Documento RAD
+# EXPECTED: 201 OK
+#############################################################################
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_RAD}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VALIDATION"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/RAD.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/RAD.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 3.1) Pubblicazione Documento RAD
+# EXPECTED: 201 OK
+#############################################################################
+# @name publication
+POST {{$dotenv BASE_URL}}:8010/v1/documents 
+FSE-JWT-Signature: {{$dotenv JWT_WITH_HASH_RAD}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "tipologiaStruttura": "Ospedale",
+  "attiCliniciRegoleAccesso": [ "PUBLICPOL" ],
+  "tipoDocumentoLivAlto": "WOR",
+  "assettoOrganizzativo": "AD_PSC001",
+  "conservazioneANorma": "string",
+  "tipoAttivitaClinica": "PHR",
+  "identificativoSottomissione": "string",
+  "healthDataFormat": "CDA", 
+  "mode": "ATTACHMENT", 
+  "identificativoDoc": "{{identificativoDoc}}",
+  "identificativoRep": "REPOSITORY",
+  "priorita": true
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/RAD.pdf" 
+Content-Type: application/octet-stream
+
+< ./files/pdf/RAD.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 4) Analisi dei Log emessi durante la validazione
+# EXPECTED: 7 Log emessi per validazione, 2 Log emessi per pubblicazione
+#############################################################################
+@from = 1970-01-01
+@to = 2100-01-01
+####
+GET {{$dotenv BASE_URL}}:9097/v1/search-events-log?startDate={{from}}&endDate={{to}}

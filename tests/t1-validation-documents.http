@@ -9,7 +9,7 @@
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+FSE-JWT-Signature: {{$dotenv JWT_LAB}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -36,7 +36,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_LDO}}
+FSE-JWT-Signature: {{$dotenv JWT_LDO}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -63,7 +63,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_PSS}}
+FSE-JWT-Signature: {{$dotenv JWT_PSS}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -90,7 +90,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_RAD}}
+FSE-JWT-Signature: {{$dotenv JWT_RAD}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -117,7 +117,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_RSA}}
+FSE-JWT-Signature: {{$dotenv JWT_RSA}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -144,7 +144,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_SING_VACC}}
+FSE-JWT-Signature: {{$dotenv JWT_SING_VACC}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -171,7 +171,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_CERT_VACC}}
+FSE-JWT-Signature: {{$dotenv JWT_CERT_VACC}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -198,7 +198,7 @@ Content-Type: application/octet-stream
 #############################################################################
 # @name validation
 POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
-FSE-JWT-Signature: {{$dotenv VALID_JWT_VPS}}
+FSE-JWT-Signature: {{$dotenv JWT_VPS}}
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW

@@ -56,6 +56,32 @@ services:
       start_period: 20s
       timeout: 10s
 
+  it-fse-gtw-fhir-mapping-engine:
+    image: it-fse-ms-runner
+    build:
+      context: ./it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping-engine.git
+      BRANCH: ${GTW_BRANCH}
+      PORT: 8022
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8022:8022
+    depends_on:
+      it-fse-srv-log-ingestion:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+
   it-fse-gtw-validator:
     image: it-fse-ms-runner
     build:
