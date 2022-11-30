@@ -1,0 +1,199 @@
+#############################################################################
+###                      Validazione corner cases                         ###
+#############################################################################
+
+
+#############################################################################
+# 1) Validazione CDA contentente CodeSystem Allowlist 
+# Input   <code code="1234" codeSystem="2.16.840.1.113883.2.9.1.11.1.2.10"/> 
+# Output  OK
+#############################################################################
+
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_ALLOWLIST.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_ALLOWLIST.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 2) Validazione CDA contentente CodeSystem Blocklist
+# Input   <code code="1234" codeSystem="2.16.840.1.113883.9.999"/>
+# Output  KO
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_BLOCKLIST.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_BLOCKLIST.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 4) Validazione CDA contentente CodeSystem Conosciuto ma Code Errato 
+# Input   <code code="1234" codeSystem="2.16.840.1.113883.6.1"/>
+# Output  KO
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_WRONG_CODE.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_WRONG_CODE.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 5) Validazione CDA contentente CodeSystem Sconosciuto
+# Input   <code code="1234" codeSystem="1.2.3.4"/>
+# Output  OK
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_UNKNOWN_SYSTEM.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_UNKNOWN_SYSTEM.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 6) Validazione CDA contentente CodeSystemVersion
+# Input   <code code="11502-2" codeSystem="2.16.840.1.113883.6.1" codeSystemVersion="2.73"/> 
+# Output  OK
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_WITH_VERSION.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_WITH_VERSION.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+#############################################################################
+# 7) Validazione CDA non contentente CodeSystemVersion
+# Input   <code code="11502-2" codeSystem="2.16.840.1.113883.6.1"/> 
+# Output  OK
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_WITHOUT_VERSION.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_WITHOUT_VERSION.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# 8) Validazione CDA contentente CodeSystemVersion sconosciuto
+# Input   <code code="11502-2" codeSystem="2.16.840.1.113883.6.1" codeSystemVersion="2.3"/> 
+# Output  OK
+#############################################################################
+# @name validation
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: {{$dotenv VALID_JWT_LAB}}
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VERIFICA"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LAB_WITH_WRONG_VERSION.pdf" 
+Content-Type: application/octet-stream
+
+< ./files-modified/LAB_WITH_WRONG_VERSION.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

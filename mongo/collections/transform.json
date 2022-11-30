@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "6387a77e49f60a2a6206bcf1"
+  },
+  "maps": [
+    {
+      "name_map": "RefertodilaboratorioFULLBODY",
+      "filename_map": "StructureMap_Referto_di_Laboratorio_v1.0.map",
+      "content_map": {
+        "$binary": {
+          "base64": "bWFwICJodHRwOi8vZmhpci5jaC9pZy9jZGEtZmhpci1tYXBzL1N0cnVjdHVyZU1hcC9SZWZlcnRvZGlsYWJvcmF0b3Jpb0ZVTExCT0RZIiA9ICJSZWZlcnRvZGlsYWJvcmF0b3Jpb0ZVTExCT0RZIg==",
+          "subType": "00"
+        }
+      }
+    }
+  ],
+  "definitions": [],
+  "valuesets": [],
+  "template_id_root": "2.16.840.1.113883.2.9.10.1.1",
+  "last_update_date": {
+    "$date": {
+      "$numberLong": "1669834622106"
+    }
+  },
+  "version": "1.0",
+  "root_map": "RefertodilaboratorioFULLBODY",
+  "deleted": false,
+  "last_sync": {
+    "$date": {
+      "$numberLong": "1669834652120"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6387a77f49f60a2a6206bcf2"
+  },
+  "maps": [
+    {
+      "name_map": "LetteraDimissioneOspedaliera",
+      "filename_map": "Lettera_Dimissione_Ospedaliera.map",
+      "content_map": {
+        "$binary": {
+          "base64": "bWFwICJodHRwOi8vZmhpci5jaC9pZy9jZGEtZmhpci1tYXBzL1N0cnVjdHVyZU1hcC9MZXR0ZXJhRGltaXNzaW9uZU9zcGVkYWxpZXJhIiA9ICJMZXR0ZXJhRGltaXNzaW9uZU9zcGVkYWxpZXJhIg==",
+          "subType": "00"
+        }
+      }
+    }
+  ],
+  "definitions": [],
+  "valuesets": [],
+  "template_id_root": "2.16.840.1.113883.2.9.10.1.5",
+  "last_update_date": {
+    "$date": {
+      "$numberLong": "1669834623884"
+    }
+  },
+  "version": "1.0",
+  "root_map": "LetteraDimissioneOspedaliera",
+  "deleted": false,
+  "last_sync": {
+    "$date": {
+      "$numberLong": "1669834652120"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6387a78349f60a2a6206bcf3"
+  },
+  "maps": [
+    {
+      "name_map": "RefertodiRadiologiaBody",
+      "filename_map": "StructureMap_Referto_di_radiologia.map",
+      "content_map": {
+        "$binary": {
+          "base64": "bWFwICJodHRwOi8vZmhpci5jaC9pZy9jZGEtZmhpci1tYXBzL1N0cnVjdHVyZU1hcC9SZWZlcnRvZGlSYWRpb2xvZ2lhQm9keSIgPSAiUmVmZXJ0b2RpUmFkaW9sb2dpYUJvZHki",
+          "subType": "00"
+        }
+      }
+    }
+  ],
+  "definitions": [],
+  "valuesets": [],
+  "template_id_root": "2.16.840.1.113883.2.9.10.1.7.1",
+  "last_update_date": {
+    "$date": {
+      "$numberLong": "1669834627136"
+    }
+  },
+  "version": "1.0",
+  "root_map": "RefertodiRadiologiaBody",
+  "deleted": false,
+  "last_sync": {
+    "$date": {
+      "$numberLong": "1669834652120"
+    }
+  }
+}]
