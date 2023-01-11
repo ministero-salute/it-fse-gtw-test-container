@@ -1,7 +1,8 @@
 #############################################################################
 # Validazione Documento VPS
 #############################################################################
-POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+# @name validation
+POST {{$dotenv IT_FSE_GTW_DISPATCHER}}/v1/documents/validation
 FSE-JWT-Signature: FAKE_HEADER.{{$dotenv JWT_VPS_PAYLOAD}}.FAKE_SIGNATURE
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -24,9 +25,15 @@ Content-Type: application/octet-stream
 
 
 #############################################################################
+# Verifica Stato Transazione
+#############################################################################
+GET {{$dotenv IT_FSE_GTW_DISPATCHER}}/v1/status/{{validation.response.body.workflowInstanceId}}
+
+
+#############################################################################
 # Analisi dei Log emessi durante la validazione
 #############################################################################
 @from = 1970-01-01
 @to = 2100-01-01
 ####
-GET {{$dotenv BASE_URL}}:9097/v1/search-events-log?startDate={{from}}&endDate={{to}}
+GET {{$dotenv IT_FSE_SRV_LOG_INGESTION}}/v1/search-events-log?startDate={{from}}&endDate={{to}}

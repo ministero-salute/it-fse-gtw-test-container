@@ -5,6 +5,7 @@ services:
       - '27888:27017'
     volumes:
       - ./mongo/:/docker-entrypoint-initdb.d/:ro
+      - ../mongo-dump:/var/lib/mongo/data
     restart: always
   
   zookeeper:
@@ -36,7 +37,7 @@ services:
   it-fse-srv-log-ingestion:
     image: it-fse-ms-runner                      
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-log-ingestion.git
       BRANCH: ${CURRENT_BRANCH}
@@ -59,7 +60,7 @@ services:
   it-fse-gtw-fhir-mapping-engine:
     image: it-fse-ms-runner
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping-engine.git
       BRANCH: ${CURRENT_BRANCH}
@@ -85,7 +86,7 @@ services:
   it-fse-gtw-validator:
     image: it-fse-ms-runner
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-validator.git
       BRANCH: ${CURRENT_BRANCH}
@@ -111,7 +112,7 @@ services:
   it-fse-gtw-status-manager:
     image: it-fse-ms-runner
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-status-manager.git
       BRANCH: ${CURRENT_BRANCH}
@@ -137,7 +138,7 @@ services:
   it-fse-gtw-status-check:
     image: it-fse-ms-runner
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-status-check.git
       BRANCH: ${CURRENT_BRANCH}
@@ -163,7 +164,7 @@ services:
   it-fse-gtw-dispatcher:
     image: it-fse-ms-runner
     build:
-      context: ./it-fse-ms-runner/
+      context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-dispatcher.git
       BRANCH: ${CURRENT_BRANCH}

@@ -1,7 +1,10 @@
+@identificativoDoc=2.16.840.1.113883.2.9.2.110.4.4^12345
+
 #############################################################################
 # Validazione Documento RSA
 #############################################################################
-POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+# @name validation
+POST {{$dotenv IT_FSE_GTW_DISPATCHER}}/v1/documents/validation
 FSE-JWT-Signature: FAKE_HEADER.{{$dotenv JWT_RSA_PAYLOAD}}.FAKE_SIGNATURE
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -26,7 +29,8 @@ Content-Type: application/octet-stream
 #############################################################################
 # Pubblicazione Documento RSA
 #############################################################################
-POST {{$dotenv BASE_URL}}:8010/v1/documents 
+# @name creation
+POST {{$dotenv IT_FSE_GTW_DISPATCHER}}/v1/documents 
 FSE-JWT-Signature: FAKE_HEADER.{{$dotenv JWT_RSA_WITH_HASH_PAYLOAD}}.FAKE_SIGNATURE
 content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -44,7 +48,7 @@ Content-Type: application/json
   "identificativoSottomissione": "string",
   "healthDataFormat": "CDA", 
   "mode": "ATTACHMENT", 
-  "identificativoDoc": "2.16.840.1.113883.2.9.2.110.4.4^12345",
+  "identificativoDoc": "{{identificativoDoc}}",
   "identificativoRep": "ID_REPOSITORY",
   "priorita": true
 }
@@ -58,9 +62,15 @@ Content-Type: application/octet-stream
 
 
 #############################################################################
-# Analisi dei Log emessi durante la validazione
+# Verifica Stato Transazione
+#############################################################################
+GET {{$dotenv IT_FSE_GTW_DISPATCHER}}/v1/status/{{creation.response.body.workflowInstanceId}}
+
+
+#############################################################################
+# Analisi dei Log emessi durante il flusso di creazione
 #############################################################################
 @from = 1970-01-01
 @to = 2100-01-01
 ####
-GET {{$dotenv BASE_URL}}:9097/v1/search-events-log?startDate={{from}}&endDate={{to}}
+GET {{$dotenv IT_FSE_SRV_LOG_INGESTION}}/v1/search-events-log?startDate={{from}}&endDate={{to}}
