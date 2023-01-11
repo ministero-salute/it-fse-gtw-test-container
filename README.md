@@ -29,6 +29,7 @@ Sono attualmente presenti due differenti istanze in due branch distinti:
 La seguente versione contiene tutti i microservizi di **gateway** ed **eds** ad oggi sviluppati.
 
 <br/>
+
 [<img src="img/container-full-gtw.png" width="75%" style="display: block; margin: 0 auto" />](container-full-gtw.png)
 
 [<img src="img/container-full-eds.png" width="75%" style="display: block; margin: 0 auto" />](container-full-eds.png)
