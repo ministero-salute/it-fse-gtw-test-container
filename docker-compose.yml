@@ -39,7 +39,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-log-ingestion.git
-      BRANCH: ${EDS_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 9097
     volumes: 
       - mvn-cache:/root/.m2
@@ -62,7 +62,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping-engine.git
-      BRANCH: ${GTW_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8022
     volumes: 
       - mvn-cache:/root/.m2
@@ -88,7 +88,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-validator.git
-      BRANCH: ${GTW_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8012
     volumes: 
       - mvn-cache:/root/.m2
@@ -114,7 +114,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-status-manager.git
-      BRANCH: ${GTW_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8013
     volumes: 
       - mvn-cache:/root/.m2
@@ -140,7 +140,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-status-check.git
-      BRANCH: ${GTW_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8017
     volumes: 
       - mvn-cache:/root/.m2
@@ -166,7 +166,7 @@ services:
       context: ./it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-dispatcher.git
-      BRANCH: ${GTW_BRANCH}
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8010
     volumes: 
       - mvn-cache:/root/.m2
