@@ -18,7 +18,7 @@
 	<versionNumber value="1"/> 
 	<recordTarget typeCode="RCT" contextControlCode="OP">
 		<patientRole classCode="PAT">
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/> 
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/> 
 			<id root="2.16.840.1.113883.9.9.9.9.9.9" extension="11111htttt" assigningAuthorityName="SAN RAFFAELE NOMENTANA"/>
 			<addr use="H"> 
 				<country>100</country>
@@ -29,7 +29,7 @@
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>via Aurora 12</streetAddressLine> 
 			</addr> 			
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:3340000000"/>
 			<patient> 
 				<name> 
@@ -55,7 +55,7 @@
 	<author>
 		<time value="20220330112426+0100"/>
 		<assignedAuthor classCode="ASSIGNED"> 
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/>
 			<addr use="HP"> 
 				<country>100</country>
 				<state>120</state>
@@ -65,8 +65,8 @@
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>via Milano 7</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson> 
 				<name> 
@@ -79,7 +79,7 @@
 	<dataEnterer typeCode="ENT"> 
 		<time value="20220330112426+0100"/> 
 		<assignedEntity> 
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/> 
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/> 
 			<addr use="HP">
 				<country>100</country>
 				<state>120</state>
@@ -89,7 +89,7 @@
 				<postalCode>00138</postalCode> 
 				<streetAddressLine>via Canevari 12B</streetAddressLine> 
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson> 
 				<name> 
@@ -104,8 +104,8 @@
 			<representedCustodianOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.1" extension="120148" assigningAuthorityName="Ministero della Salute"/>	
 				<name>SAN RAFFAELE NOMENTANA</name>
-				<telecom use="MC" value="tel:3340000000"/> 
-				<addr use="HP"> 
+				<telecom use="WP" value="tel:3340000000"/> 
+				<addr use="WP"> 
 					<country>100</country>
 					<state>120</state>
 					<county>RM</county> 
@@ -143,7 +143,7 @@
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>via Corvetto 3</streetAddressLine>
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson> 
 				<name>  
@@ -168,8 +168,8 @@
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>via Corvetto 3</streetAddressLine>
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="HP" value="tel:22998276800"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<assignedPerson> 
 				<name> 
 					<family>Test</family> 
@@ -193,7 +193,7 @@
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>via Vittorio Veneto 3</streetAddressLine> 
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<associatedPerson>
 				<name>
 					<family>Esempio</family>
@@ -203,7 +203,7 @@
 			<scopingOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.1" extension="120148" assigningAuthorityName="Ministero della Salute"/>
 				<name>SAN RAFFAELE NOMENTANA</name>
-				<telecom use="MC" value="tel:3340000000"/> 
+				<telecom use="WP" value="tel:3340000000"/> 
 				<addr>
 					<country>100</country>
 					<state>120</state>
@@ -267,7 +267,7 @@
 					<serviceProviderOrganization>
 						<id root="2.16.840.1.113883.2.9.4.1.2" extension="XXX" assigningAuthorityName="Ministero della Salute"/>
 						<name>[NOME_PRESIDIO]</name>
-						<telecom use="MC" value="tel:3340000000"/>
+						<telecom use="WP" value="tel:3340000000"/>
 						<asOrganizationPartOf>
 							<id root="2.16.840.1.113883.2.9.4.1.1" extension="XXX" assigningAuthorityName="Ministero della Salute"/>
 						</asOrganizationPartOf>

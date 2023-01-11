@@ -1,0 +1,66 @@
+#############################################################################
+# Validazione Documento LDO
+#############################################################################
+POST {{$dotenv BASE_URL}}:8010/v1/documents/validation
+FSE-JWT-Signature: FAKE_HEADER.{{$dotenv JWT_LDO_PAYLOAD}}.FAKE_SIGNATURE
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "healthDataFormat": "CDA",
+  "mode": "ATTACHMENT",
+  "activity": "VALIDATION"
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LDO.pdf" 
+Content-Type: application/octet-stream
+
+< ./../files/pdf/LDO.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# Pubblicazione Documento LDO
+#############################################################################
+POST {{$dotenv BASE_URL}}:8010/v1/documents 
+FSE-JWT-Signature: FAKE_HEADER.{{$dotenv JWT_LDO_WITH_HASH_PAYLOAD}}.FAKE_SIGNATURE
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="requestBody";
+Content-Type: application/json
+
+{
+  "tipologiaStruttura": "Ospedale",
+  "attiCliniciRegoleAccesso": [ "PUBLICPOL" ],
+  "tipoDocumentoLivAlto": "WOR",
+  "assettoOrganizzativo": "AD_PSC001",
+  "conservazioneANorma": "string",
+  "tipoAttivitaClinica": "PHR",
+  "identificativoSottomissione": "string",
+  "healthDataFormat": "CDA", 
+  "mode": "ATTACHMENT", 
+  "identificativoDoc": "2.16.840.1.113883.2.9.2.110.4.4^12345",
+  "identificativoRep": "ID_REPOSITORY",
+  "priorita": true
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="file/LDO.pdf" 
+Content-Type: application/octet-stream
+
+< ./../files/pdf/LDO.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+#############################################################################
+# Analisi dei Log emessi durante la validazione
+#############################################################################
+@from = 1970-01-01
+@to = 2100-01-01
+####
+GET {{$dotenv BASE_URL}}:9097/v1/search-events-log?startDate={{from}}&endDate={{to}}

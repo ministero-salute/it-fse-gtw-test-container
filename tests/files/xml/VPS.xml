@@ -15,7 +15,7 @@
 	<versionNumber value="1"/>
 	<recordTarget>
 		<patientRole>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/>
 			<addr use="H"> 
 				<country>100</country>
 				<state>120</state>
@@ -25,7 +25,7 @@
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>Via Aurora 12</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:3340000000"/>
 			<patient>
 				<name>
@@ -61,8 +61,8 @@
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>via Milano 7</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson>
 				<name>
@@ -85,8 +85,8 @@
 				<censusTract>058091</censusTract>
 				<streetAddressLine>via Milano 10</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:filippo.bianco@gmail.com"/>
-			<telecom use="MC" value="tel:3340000000"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
+			<telecom use="WP" value="mailto:prova.provax@example.com"/>
 			<assignedPerson>
 				<name>
 					<family>Bianchi</family>
@@ -100,7 +100,7 @@
 			<representedCustodianOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.2" extension="PROVAX00X00X000Y" assigningAuthorityName="Ministero della Salute"/>
 				<name>XXX</name>
-				<telecom use="MC" value="tel:3340000000"/>
+				<telecom use="WP" value="tel:3340000000"/>
 				<addr>
 					<country>100</country>
 					<state>120</state>
@@ -124,7 +124,7 @@
 					<city>Roma</city> 
 					<censusTract>058091</censusTract>
 				</addr>
-				<telecom use="WP" value="mailto:paola.silviani@gmail.com"/>
+				<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 				<telecom use="MC" value="tel:3340000000"/>
 				<assignedPerson>
 					<name>
@@ -147,7 +147,7 @@
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>via Corvetto 3</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="WP" value="mailto:prova.provax@example.com"/>
 			<associatedPerson>
 				<name>
 					<family>Prova</family>
@@ -222,7 +222,7 @@
 					<serviceProviderOrganization>
 						<id root="2.16.840.1.113883.2.9.4.1.2" extension="120103.XX" assigningAuthorityName="Ministero della Salute"/>
 						<name>Ospedale Sant'Eugenio</name>
-						<telecom use="MC" value="tel:3340000000"/>
+						<telecom use="WP" value="tel:3340000000"/>
 						<asOrganizationPartOf>
 							<id root="2.16.840.1.113883.2.9.4.1.1" extension="120103" assigningAuthorityName="Ministero della Salute"/>
 						</asOrganizationPartOf>
@@ -394,7 +394,7 @@
 						<section ID="ANAMNESI">
 							<templateId root="2.16.840.1.113883.2.9.10.1.6.55"/>
 							<code code="11329-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Anamnesi generale"/>
-							<title>Inquadramento clinico iniziale</title>
+							<title>Anamnesi</title>
 							<text>
 								<list>
 									<item>
@@ -1210,7 +1210,7 @@
 										</time>
 										<participantRole classCode="SDLOC">
 											<templateId root="2.16.840.1.113883.2.9.10.1.6.64"/>
-											<id root="2.16.840.1.113883.2.9.4.1.1" extension="[ID_STRUTTURA]" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
+											<id root="2.16.840.1.113883.2.9.4.1.1" extension="IDSTRUTTURA" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
 											<code code="XXX" codeSystem="2.16.840.1.113883.2.9.1.11.1.2.11" codeSystemName="TipoLuogoPostDimissione_VPS" displayName="[DES_LUOGO]"/>
 										</participantRole>
 									</participant>							
@@ -1241,7 +1241,7 @@
 										</time>
 										<participantRole classCode="SDLOC">
 											<templateId root="2.16.840.1.113883.2.9.10.1.6.64"/>
-											<id root="2.16.840.1.113883.2.9.4.1.1" extension="[ID_STRUTTURA]" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
+											<id root="2.16.840.1.113883.2.9.4.1.1" extension="IDSTRUTTURA" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
 											<code code="XXX" codeSystem="2.16.840.1.113883.2.9.1.11.1.2.11" codeSystemName="TipoLuogoPostDimissione_VPS" displayName="[DES_LUOGO]"/>
 										</participantRole>
 									</participant>
@@ -1411,7 +1411,7 @@
 							<!--Periodo di inizio e fine della terapia (OBBLIGATORIO)-->
 							<effectiveTime xsi:type="IVL_TS">
 								<low value="20220425121122+0100"/>
-								<high value="20210707221122+0100"/>
+								<high value="20220707221122+0100"/>
 							</effectiveTime>
 							<!--Posologia – es. 2 volte al giorno (OPZIONALE)-->
 							<effectiveTime operator="A" xsi:type="PIVL_TS" institutionSpecified="true">

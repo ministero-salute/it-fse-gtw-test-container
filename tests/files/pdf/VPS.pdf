@@ -1,5 +1,5 @@
 %PDF-1.4
-%ï¿½ï¿½ï¿½ï¿½
+%öäüß
 1 0 obj
 <<
 /Type /Catalog
@@ -40,8 +40,9 @@ endobj
 /Filter /FlateDecode
 >>
 stream
-xï¿½-ï¿½;ï¿½0Eï¿½ï¿½ï¿½ï¿½Sï¿½&>ï¿½ï¿½ ï¿½~ï¿½Cï¿½hï¿½ZMï¿½Iï¿½ï¿½U\.ï¿½ï¿½ï¿½D?ï¿½ï¿½
-ï¿½9ï¿½@ï¿½Fï¿½ï¿½1Èˆï¿½ï¿½ï¿½ï¿½ï¿½eï¿½`ï¿½ï¿½fï¿½ï¿½ï¿½lpzï¿½ï¿½ï¿½ï¿½[}ï¿½'ï¿½(ï¿½Ê¬Ý‚ï¿½	:`ï¿½^ßºï¿½&rï¿½b,V+ï¿½ï¿½uDï¿½ï¿½ï¿½ï¿½s@(:}.Jï¿½ï¿½wï¿½v5|ï¿½ï¿½Aï¿½jkï¿½ï¿½Xï¿½pï¿½nï¿½Oï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½+;ï¿½
+xœ-Ž±
+Â0„÷<ÅáTE´‰±›VŠ‚à:¸Dó×ZmZL:øöq98¸ïî–$Æ¹„T BÈé(í„J0‹c•§ëöÅ(A‚½³å·ölpý —«{ýä7.QÑÖ—~Mq
+‘­¶a`žN“4–ÈÖ«IT	ˆhc]Ë7_2´÷úVÖl½âÓtpeÓ½Š¦³Ùjó~÷b«À±ýªÖ$¾Èf;t
 endstream
 endobj
 7 0 obj
@@ -76,7 +77,7 @@ endobj
 endobj
 12 0 obj
 <<
-/Length 61333
+/Length 61336
 /Type /EmbeddedFile
 /Subtype /application#2Fxml
 /Params 13 0 R
@@ -99,7 +100,7 @@ stream
 	<versionNumber value="1"/>
 	<recordTarget>
 		<patientRole>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/>
 			<addr use="H"> 
 				<country>100</country>
 				<state>120</state>
@@ -109,7 +110,7 @@ stream
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>Via Aurora 12</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:3340000000"/>
 			<patient>
 				<name>
@@ -145,8 +146,8 @@ stream
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>via Milano 7</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson>
 				<name>
@@ -169,8 +170,8 @@ stream
 				<censusTract>058091</censusTract>
 				<streetAddressLine>via Milano 10</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:filippo.bianco@gmail.com"/>
-			<telecom use="MC" value="tel:3340000000"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
+			<telecom use="WP" value="mailto:prova.provax@example.com"/>
 			<assignedPerson>
 				<name>
 					<family>Bianchi</family>
@@ -184,7 +185,7 @@ stream
 			<representedCustodianOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.2" extension="PROVAX00X00X000Y" assigningAuthorityName="Ministero della Salute"/>
 				<name>XXX</name>
-				<telecom use="MC" value="tel:3340000000"/>
+				<telecom use="WP" value="tel:3340000000"/>
 				<addr>
 					<country>100</country>
 					<state>120</state>
@@ -208,7 +209,7 @@ stream
 					<city>Roma</city> 
 					<censusTract>058091</censusTract>
 				</addr>
-				<telecom use="WP" value="mailto:paola.silviani@gmail.com"/>
+				<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 				<telecom use="MC" value="tel:3340000000"/>
 				<assignedPerson>
 					<name>
@@ -231,7 +232,7 @@ stream
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>via Corvetto 3</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="WP" value="mailto:prova.provax@example.com"/>
 			<associatedPerson>
 				<name>
 					<family>Prova</family>
@@ -306,7 +307,7 @@ stream
 					<serviceProviderOrganization>
 						<id root="2.16.840.1.113883.2.9.4.1.2" extension="120103.XX" assigningAuthorityName="Ministero della Salute"/>
 						<name>Ospedale Sant'Eugenio</name>
-						<telecom use="MC" value="tel:3340000000"/>
+						<telecom use="WP" value="tel:3340000000"/>
 						<asOrganizationPartOf>
 							<id root="2.16.840.1.113883.2.9.4.1.1" extension="120103" assigningAuthorityName="Ministero della Salute"/>
 						</asOrganizationPartOf>
@@ -478,7 +479,7 @@ stream
 						<section ID="ANAMNESI">
 							<templateId root="2.16.840.1.113883.2.9.10.1.6.55"/>
 							<code code="11329-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Anamnesi generale"/>
-							<title>Inquadramento clinico iniziale</title>
+							<title>Anamnesi</title>
 							<text>
 								<list>
 									<item>
@@ -1294,7 +1295,7 @@ stream
 										</time>
 										<participantRole classCode="SDLOC">
 											<templateId root="2.16.840.1.113883.2.9.10.1.6.64"/>
-											<id root="2.16.840.1.113883.2.9.4.1.1" extension="[ID_STRUTTURA]" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
+											<id root="2.16.840.1.113883.2.9.4.1.1" extension="IDSTRUTTURA" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
 											<code code="XXX" codeSystem="2.16.840.1.113883.2.9.1.11.1.2.11" codeSystemName="TipoLuogoPostDimissione_VPS" displayName="[DES_LUOGO]"/>
 										</participantRole>
 									</participant>							
@@ -1325,7 +1326,7 @@ stream
 										</time>
 										<participantRole classCode="SDLOC">
 											<templateId root="2.16.840.1.113883.2.9.10.1.6.64"/>
-											<id root="2.16.840.1.113883.2.9.4.1.1" extension="[ID_STRUTTURA]" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
+											<id root="2.16.840.1.113883.2.9.4.1.1" extension="IDSTRUTTURA" assigningAuthorityName="[NOME_ORGANIZZAZIONE]"/>
 											<code code="XXX" codeSystem="2.16.840.1.113883.2.9.1.11.1.2.11" codeSystemName="TipoLuogoPostDimissione_VPS" displayName="[DES_LUOGO]"/>
 										</participantRole>
 									</participant>
@@ -1495,7 +1496,7 @@ stream
 							<!--Periodo di inizio e fine della terapia (OBBLIGATORIO)-->
 							<effectiveTime xsi:type="IVL_TS">
 								<low value="20220425121122+0100"/>
-								<high value="20210707221122+0100"/>
+								<high value="20220707221122+0100"/>
 							</effectiveTime>
 							<!--Posologia â€“ es. 2 volte al giorno (OPZIONALE)-->
 							<effectiveTime operator="A" xsi:type="PIVL_TS" institutionSpecified="true">
@@ -1581,7 +1582,7 @@ endstream
 endobj
 13 0 obj
 <<
-/Size 61333
+/Size 61336
 >>
 endobj
 xref
@@ -1599,13 +1600,13 @@ xref
 0000000728 00000 n
 0000000760 00000 n
 0000000860 00000 n
-0000062312 00000 n
+0000062315 00000 n
 trailer
 <<
 /Root 1 0 R
-/ID [<0A3099F650FD2CFDAE2E7385F047BB68> <0A3099F650FD2CFDAE2E7385F047BB68>]
+/ID [<B9FC2ADD4211647B0AF720CA42B99DEC> <B9FC2ADD4211647B0AF720CA42B99DEC>]
 /Size 14
 >>
 startxref
-62346
+62349
 %%EOF

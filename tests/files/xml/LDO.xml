@@ -9,11 +9,11 @@
 	<effectiveTime value="20220417100000+0100"/>
 	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
 	<languageCode code="it-IT"/>
-	<setId root="2.16.840.1.113883.2.9.2.99.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.DW322E34" assigningAuthorityName="Regione Lazio"/>
-	<versionNumber value="2"/>
+	<setId root="2.16.840.1.113883.2.9.2.99.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.Q123E456" assigningAuthorityName="Regione Lazio"/>
+	<versionNumber value="1"/>
 	<recordTarget>
 		<patientRole>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="TSTSMN63A01F205H" assigningAuthorityName="MEF"/>
 			<patient>
 				<name>
 					<family>Guido</family>
@@ -35,7 +35,7 @@
 	<author>
 		<time value="20220417093000+0100"/>
 		<assignedAuthor>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="MTTCVN90M22G999T" assigningAuthorityName="MEF"/>
 			<addr use="HP"> 
 				<country>100</country>
 				<state>120</state>
@@ -45,9 +45,9 @@
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>via Milano 7</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
-			<telecom use="MC" value="tel:3340000000"/>
+			<telecom use="HP" value="mailto:matteo.cervone@gmail.it"/> 
+			<telecom use="WP" value="mailto:matteo.cervone@pec.it"/> 
+			<telecom use="MC" value="tel:3478129873"/>
 			<assignedPerson>
 				<name>
 					<family>Cervone</family>
@@ -60,7 +60,7 @@
 	<dataEnterer>
 		<time value="20220417093500+0100"/>
 		<assignedEntity>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PIANCU80Y76T103J" assigningAuthorityName="MEF"/>
 			<assignedPerson>
 				<name>
 					<family>Palla</family>
@@ -80,8 +80,8 @@
 	</custodian>
 	<informationRecipient>
 		<intendedRecipient>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
-			<telecom use="MC" value="tel:3340000000"/> 
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="CAESPR79H68Y498Q" assigningAuthorityName="MEF"/>
+			<telecom use="WP" value="tel:3409276689"/> 
 			<informationRecipient>
 				<name>
 					<family>Esposito</family>
@@ -94,7 +94,7 @@
 		<time value="20220417093500+0100"/>
 		<signatureCode code="S"/>
 		<assignedEntity>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PNCPLL99M22G999T" assigningAuthorityName="MEF"/>
 			<!-- telecom e addr-->
 			<assignedPerson>
 				<name>
@@ -122,13 +122,13 @@
 			<priorityCode code="R" codeSystem="2.16.840.1.113883.5.7" codeSystemName="HL7 ActPriority" displayName="Normale"/>
 		</order>
 	</inFulfillmentOf>
-	<relatedDocument typeCode="RPLC">
+	<!-- <relatedDocument typeCode="RPLC">
 		<parentDocument>
 			<id root="2.16.840.1.113883.2.9.2.99.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.DW322E34" assigningAuthorityName="Regione Lazio"/>
 			<setId root="2.16.840.1.113883.2.9.2.99.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.DW322E34" assigningAuthorityName="Regione Lazio"/>
 			<versionNumber value="1"/> 
 		</parentDocument>
-	</relatedDocument>	
+	</relatedDocument>	 -->
 	<componentOf>
 		<encompassingEncounter>
 			<id root="2.16.840.1.113883.2.9.2.120103.4.6" extension="2011008159" assigningAuthorityName="XXX"/>
@@ -138,7 +138,7 @@
 			</effectiveTime>
 			<responsibleParty>
 				<assignedEntity>
-					<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+					<id root="2.16.840.1.113883.2.9.4.3.2" extension="ASTYVFG76R29L123T" assigningAuthorityName="MEF"/>
 					<code code="RESPRSN"/>
 					<assignedPerson>
 						<name>
@@ -157,7 +157,7 @@
 					<serviceProviderOrganization>
 						<id root="2.16.840.1.113883.2.9.4.1.2" extension="120103.XX" assigningAuthorityName="Ministero della Salute"/>
 						<name>Ospedale Sant'Eugenio</name>
-						<telecom use="MC" value="tel:3340000000"/>
+						<telecom use="WP" value="tel:06/51004520"/>
 						<asOrganizationPartOf>
 							<id root="2.16.840.1.113883.2.9.4.1.1" extension="120103" assigningAuthorityName="Ministero della Salute"/>
 						</asOrganizationPartOf>
@@ -396,10 +396,10 @@
 							<performer>
 								<time value="20220407170000+0100"/>
 								<assignedEntity>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA80A01H501U" assigningAuthorityName="MEF"/>
 									<assignedPerson>
 										<name>
-											<family>Esempio</family>
+											<family>Rossi</family>
 											<given>Mario</given>
 										</name>
 									</assignedPerson>
@@ -408,10 +408,10 @@
 							<participant typeCode="IND">
 								<time value="20220407100000+0100"/>
 								<participantRole>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="DPSSRG66H11H501V" assigningAuthorityName="MEF"/>
 									<playingEntity>
 										<name>
-											<family>Test</family>
+											<family>Di Pasquale</family>
 											<given>Sergio</given>
 										</name>
 									</playingEntity>
@@ -448,10 +448,10 @@
 							<performer>
 								<time value="20220410150000+0100"/>
 								<assignedEntity>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSFLV65H03H501C" assigningAuthorityName="MEF"/>
 									<assignedPerson>
 										<name>
-											<family>Esempio</family>
+											<family>Rossi</family>
 											<given>Flavio</given>
 										</name>
 									</assignedPerson>
@@ -460,10 +460,10 @@
 							<participant typeCode="IND">
 								<time value="20220410090000+0100"/>
 								<participantRole>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="DPLMCR66B44H501K" assigningAuthorityName="MEF"/>
 									<playingEntity>
 										<name>
-											<family>Prova</family>
+											<family>Di Paolo</family>
 											<given>Mariacarla</given>
 										</name>
 									</playingEntity>
@@ -657,10 +657,10 @@
 							<performer>
 								<time value="20220402221122+0100"/>
 								<assignedEntity>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="FCCGDI86H50I470K" assigningAuthorityName="MEF"/>
 									<assignedPerson>
 										<name>
-											<family>Esempio</family>
+											<family>Cervone</family>
 											<given>Flavia</given>
 										</name>
 									</assignedPerson>
@@ -669,10 +669,10 @@
 							<participant typeCode="DIR">
 								<time value="20220301221122+0100"/>
 								<participantRole>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PGNLSU83M53F054O" assigningAuthorityName="MEF"/>
 									<playingEntity>
 										<name>
-											<family>Test</family>
+											<family>PAGANO</family>
 											<given>LUISA</given>
 										</name>
 									</playingEntity >
@@ -787,10 +787,10 @@
 							<participant typeCode="IND">
 								<time value="20220426221122+0100"/>
 								<participantRole>
-									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/>
+									<id root="2.16.840.1.113883.2.9.4.3.2" extension="PGNLSU83M53F054O" assigningAuthorityName="MEF"/>
 									<playingEntity>
 										<name>
-											<family>Prova</family>
+											<family>PAGANO</family>
 											<given>LUISA</given>
 										</name>
 									</playingEntity >
@@ -810,7 +810,7 @@
 									<code code="029480086" codeSystem="2.16.840.1.113883.2.9.6.1.5" codeSystemName="AIC" displayName="Quantità nella Confezione"/>
 									<value xsi:type="REAL" value="50"/>
 								</observation>
-							</entryRelationship>	
+							</entryRelationship >		
 							<!-- NUMERO DI CONFEZIONI -->
 							<entryRelationship typeCode="COMP">
 								<supply classCode="SPLY" moodCode="RQO">

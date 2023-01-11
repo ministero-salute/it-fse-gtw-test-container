@@ -36,12 +36,13 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 180
+/Length 181
 /Filter /FlateDecode
 >>
 stream
-xú-é;¬0E˜¸äãS—&Xïnæ
-Çä‡78tâÊ´ı—§òTﬂ[≈Â¬Œ·ŒI3	©@Öê£A⁄ï`« #"*Ø^WıÉQ\€iÒ¬ñü:∞¡ÈçNvPÿ/3lıùü»£¢ÆÚnŒ¶8ËÄù{}Îrö qöƒX¨*V™∫	Íâhm}ÕÁÄP2t˙\VlÉÔ„Ì¯“5É¬5÷@c±ú·∏›¸üÿ[Î±¸R+÷Á;ó
+xú-éÀ
+¬0D˜˘ä¡U—&∂à›˘*(
+Çt—M4∑÷G”b“Öo7sffAbúKH*ÖLF)h'TäiÉåà®∫;8]∑/FyÏç-øµgÉÀΩ¸®pXÂÿÎ'øQDe[˝õ·"[m!√¿,Kí,ïXÆ	*Vì>Ë!h ¢çu-_=|≈–ﬁÎkU≥ınàO”¡UM˜2(õŒh,Wsú˜ªˇ˚õ—ØjM‚…‹;x
 endstream
 endobj
 7 0 obj
@@ -76,7 +77,7 @@ endobj
 endobj
 12 0 obj
 <<
-/Length 31453
+/Length 31487
 /Type /EmbeddedFile
 /Subtype /application#2Fxml
 /Params 13 0 R
@@ -97,11 +98,11 @@ stream
 	<effectiveTime value="20220509103000+0100"/>
 	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="HL7 Confidentiality" displayName="Normal"/>
 	<languageCode code="it-IT"/>
-	<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.DW322E34" assigningAuthorityName="Regione Lazio"/>
-	<versionNumber value="2"/>
+	<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.LCNLDE90L47H501Q.20220509102426.Q123E456" assigningAuthorityName="Regione Lazio"/>
+	<versionNumber value="1"/>
 	<recordTarget>
 		<patientRole>
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/>
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/>
 			<addr use="H"> 
 				<country>100</country>
 				<state>120</state>
@@ -111,7 +112,7 @@ stream
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>Via Aurora 12</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:3340000000"/>
 			<patient>
 				<name>
@@ -147,8 +148,8 @@ stream
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>via Milano 7</streetAddressLine> 
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson>
 				<name>
@@ -171,8 +172,8 @@ stream
 				<censusTract>058091</censusTract>
 				<streetAddressLine>via Milano 7</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
-			<telecom use="MC" value="tel:3340000000"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="MC" value="tel:3300000000"/> 
 			<assignedPerson>
 				<name>
 					<family>Prova</family>
@@ -186,7 +187,7 @@ stream
 			<representedCustodianOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.2" extension="XXX" assigningAuthorityName="Ministero della Salute"/>
 				<name>XXX</name>
-				<telecom use="MC" value="tel:3340000000"/>
+				<telecom use="WP" value="tel:3340000000"/>
 				<addr>
 					<country>100</country>
 					<state>120</state>
@@ -211,8 +212,8 @@ stream
 					<censusTract>058091</censusTract>
 					<streetAddressLine>Via Tommaso 14</streetAddressLine>
 				</addr>
-				<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
-				<telecom use="MC" value="tel:3340000000"/>
+				<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+				<telecom use="MC" value="tel:3300000000"/> 
 				<assignedPerson>
 					<name>
 						<family>Prova</family>
@@ -236,7 +237,7 @@ stream
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>via Corvetto 3</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
 			<associatedPerson>
 				<name>
 					<family>Test</family>
@@ -258,13 +259,13 @@ stream
 			<effectiveTime value="20220509073000+0100"/> 
 		</serviceEvent> 
 	</documentationOf> 	
-	<relatedDocument typeCode="RPLC"> 
+	<!-- <relatedDocument typeCode="RPLC"> 
 		<parentDocument> 
 			<id root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.LCNLDE90L47H501Q.20210420112426.F123E45G" assigningAuthorityName="HL7 Italia"/> 
 			<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.LCNLDE90L47H501Q.20220420112426.DW322E34" assigningAuthorityName="Regione Lazio"/>
 			<versionNumber value="1"/>
 		</parentDocument> 
-	</relatedDocument>
+	</relatedDocument> -->
 	<componentOf>
 		<encompassingEncounter>
 			<id root="2.16.840.1.113883.2.9.2.120110.4.6" extension="2011008159" assigningAuthorityName="MEF"/>
@@ -872,7 +873,7 @@ endstream
 endobj
 13 0 obj
 <<
-/Size 31453
+/Size 31487
 >>
 endobj
 xref
@@ -884,19 +885,19 @@ xref
 0000000190 00000 n
 0000000302 00000 n
 0000000348 00000 n
-0000000602 00000 n
-0000000635 00000 n
-0000000696 00000 n
-0000000728 00000 n
-0000000760 00000 n
-0000000860 00000 n
-0000032432 00000 n
+0000000603 00000 n
+0000000636 00000 n
+0000000697 00000 n
+0000000729 00000 n
+0000000761 00000 n
+0000000861 00000 n
+0000032467 00000 n
 trailer
 <<
 /Root 1 0 R
-/ID [<72F5DEE2DADA38B6EB0995F45A2958C2> <72F5DEE2DADA38B6EB0995F45A2958C2>]
+/ID [<0B468584CCBFD03D002AF284DF3E8B6A> <0B468584CCBFD03D002AF284DF3E8B6A>]
 /Size 14
 >>
 startxref
-32466
+32501
 %%EOF

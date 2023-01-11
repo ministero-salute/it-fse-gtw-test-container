@@ -1,5 +1,5 @@
 %PDF-1.4
-%ï¿½ï¿½ï¿½ï¿½
+%öäüß
 1 0 obj
 <<
 /Type /Catalog
@@ -40,8 +40,8 @@ endobj
 /Filter /FlateDecode
 >>
 stream
-xï¿½-ï¿½;ï¿½0Eï¿½ï¿½ï¿½ï¿½Sï¿½&Zï¿½nï¿½
-ï¿½ï¿½ï¿½78tï¿½ï¿½ï¿½Ñ¤ï¿½Tï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I3	ï¿½@ï¿½ï¿½ï¿½Aï¿½ï¿½`ï¿½ #"*ï¿½^Wï¿½ï¿½Q\ï¿½iï¿½Â–ï¿½:ï¿½ï¿½ï¿½NvPï¿½/3lï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½nÎ¦8è€{}ï¿½rï¿½ï¿½$MFXï¿½*Vï¿½ï¿½	ï¿½hm}ï¿½ï¿½P2tï¿½\Vlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½5ï¿½@cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½R+×;ï¿½
+xœ-±
+Â0„÷<ÅáTE´‰±›VŠ‚à:¸Dó×ZmZL:øöq98¸ïî–$Æ¹„T BÈd4í„šbÇ #"*N×í‹Q<‚{gËoíÙàúA/?*V9öúÉo\¢¢­/ı›â"[m!ÃÀ<M’TIdk‚ŠÕ¤ªD´±®å›‡/Ú{}+k¶Şñi:¸²é^EÓYlµÀy¿û?±UàØŒ~Uk_ÈÂ;u
 endstream
 endobj
 7 0 obj
@@ -76,7 +76,7 @@ endobj
 endobj
 12 0 obj
 <<
-/Length 14934
+/Length 14965
 /Type /EmbeddedFile
 /Subtype /application#2Fxml
 /Params 13 0 R
@@ -94,11 +94,11 @@ stream
 	<effectiveTime value="20220330112426+0100"/>
 	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="HL7 Confidentiality" displayName="Normal"/>
 	<languageCode code="it-IT"/>
-	<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="c030702.TSTSMN63A01F205H.20220325112426.TSS1Tkju" assigningAuthorityName="Regione Lazio"/> 
-	<versionNumber value="2"/> 
+	<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.TSTSMN63A01F205H.20220325112426.OQlvTq1J" assigningAuthorityName="Regione Lazio"/> 
+	<versionNumber value="1"/> 
 	<recordTarget typeCode="RCT" contextControlCode="OP">
 		<patientRole classCode="PAT">
-			<id root="2.16.840.1.113883.2.9.4.3.2" extension="RSSMRA22A01A399Z" assigningAuthorityName="MEF"/> 
+			<id root="2.16.840.1.113883.2.9.4.3.2" extension="GTWGWY82B42G920M" assigningAuthorityName="MEF"/> 
 			<addr use="H"> 
 				<country>100</country>
 				<state>120</state>
@@ -117,7 +117,7 @@ stream
 				<postalCode>00138</postalCode> 
 				<streetAddressLine>Via Canevari 12B</streetAddressLine>
 			</addr>			
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<telecom use="MC" value="tel:33224456"/>
 			<patient> 
 				<name> 
@@ -153,8 +153,8 @@ stream
 				<postalCode>00184</postalCode> 
 				<streetAddressLine>Via Milano 7</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<telecom use="MC" value="tel:3340000000"/>
 			<assignedPerson> 
 				<name> 
@@ -184,7 +184,7 @@ stream
 			<representedCustodianOrganization>
 				<id root="2.16.840.1.113883.2.9.4.1.2" extension="120148" assigningAuthorityName="Ministero della Salute"/>	
 				<name>SAN RAFFAELE NOMENTANA</name>
-				<telecom use="MC" value="tel:3340000000"/> 
+				<telecom use="WP" value="tel:3340000000"/> 
 				<addr> 
 					<country>100</country>
 					<state>120</state>
@@ -200,7 +200,7 @@ stream
 	<informationRecipient> 
 		<intendedRecipient> 
 			<id root="2.16.840.1.113883.2.9.4.3.2" extension="PROVAX00X00X000Y" assigningAuthorityName="MEF"/> 
-			<telecom use="WP" value="mailto:prova.provax@pec.it"/> 
+			<telecom use="WP" value="mailto:prova.provax@example.com"/> 
 			<informationRecipient> 
 				<name>
 					<family>Test</family> 
@@ -224,8 +224,8 @@ stream
 					<postalCode>00164</postalCode> 
 					<streetAddressLine>Via Corvetto 3</streetAddressLine>
 				</addr> 
-				<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-				<telecom use="MC" value="tel:3340000000"/> 
+				<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+				<telecom use="WP" value="tel:3340000000"/> 
 				<assignedPerson> 
 					<name>  
 						<family>Prova</family> 
@@ -250,8 +250,8 @@ stream
 				<postalCode>00164</postalCode> 
 				<streetAddressLine>Via Corvetto 3</streetAddressLine>
 			</addr> 
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/> 
-			<telecom use="MC" value="tel:3340000000"/> 
+			<telecom use="HP" value="mailto:prova.provax@example.com"/> 
+			<telecom use="WP" value="tel:3340000000"/> 
 			<assignedPerson> 
 				<name> 
 					<family>Test</family> 
@@ -275,7 +275,7 @@ stream
 				<postalCode>00187</postalCode> 
 				<streetAddressLine>Via Vittorio Veneto 3</streetAddressLine>
 			</addr>
-			<telecom use="HP" value="mailto:prova.provax@gmail.it"/>
+			<telecom use="HP" value="mailto:prova.provax@example.com"/>
 			<associatedPerson>
 				<name>
 					<family>Esempio</family>
@@ -286,7 +286,7 @@ stream
 				<id root="2.16.840.1.113883.2.9.4.1.2" extension="120148" assigningAuthorityName="Ministero della Salute"/><!-- STS11-->
 				<name></name>
 				<name>SAN RAFFAELE NOMENTANA</name>
-				<telecom use="MC" value="tel:3340000000"/> 
+				<telecom use="WP" value="tel:3340000000"/> 
 				<addr> 
 					<country>100</country>
 					<state>120</state>
@@ -332,13 +332,13 @@ stream
 		</serviceEvent>
 	</documentationOf>
 	
-	<relatedDocument typeCode ="RPLC"> 
+	<!-- <relatedDocument typeCode ="RPLC"> 
 		<parentDocument> 
 			<id root="2.16.840.1.113883.2.9.2.120.4.4" extension="030702.TSTSMN63A01F205H.20220330112426.TSS1Tkju" assigningAuthorityName="Regione Lazio"/>
 			<setId root="2.16.840.1.113883.2.9.2.120.4.4" extension="c030702.TSTSMN63A01F205H.20220325112426.TSS1Tkju" assigningAuthorityName="Regione Lazio"/>
 			<versionNumber value="1"/> 
 		</parentDocument> 
-	</relatedDocument> 
+	</relatedDocument>  -->
 	
 	<componentOf>
 		<encompassingEncounter>
@@ -360,7 +360,7 @@ stream
 					<serviceProviderOrganization>
 						<id root="2.16.840.1.113883.2.9.4.1.2" extension="XXX" assigningAuthorityName="Ministero della Salute"/>
 						<name>[nome_presidio]</name>
-						<telecom use="MC" value="tel:3340000000"/>
+						<telecom use="WP" value="tel:3340000000"/>
 						<asOrganizationPartOf>
 							<id root="2.16.840.1.113883.2.9.4.1.1" extension="XXX" assigningAuthorityName="Ministero della Salute"/>
 						</asOrganizationPartOf>
@@ -488,7 +488,7 @@ endstream
 endobj
 13 0 obj
 <<
-/Size 14934
+/Size 14965
 >>
 endobj
 xref
@@ -506,13 +506,13 @@ xref
 0000000728 00000 n
 0000000760 00000 n
 0000000860 00000 n
-0000015913 00000 n
+0000015944 00000 n
 trailer
 <<
 /Root 1 0 R
-/ID [<4D44AC7947642FC8E5EC99C3600C7B1F> <4D44AC7947642FC8E5EC99C3600C7B1F>]
+/ID [<167A3A83B6584D93E415A286D65A9D0A> <167A3A83B6584D93E415A286D65A9D0A>]
 /Size 14
 >>
 startxref
-15947
+15978
 %%EOF
