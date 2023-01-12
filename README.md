@@ -46,5 +46,5 @@ Al termine dell'installazione di `REST Client` sarà possibile avviare i servizi
 <br/>
 
 ## Repos
-- [it-fse-support](https://github.com/ministero-salute/it-fse-support) - Pagina di supporto FSE 2.0
-- [it-fse-landing](https://github.com/ministero-salute/it-fse-landing) - Landing page dei repository FSE 2.0
+- [*it-fse-support*](https://github.com/ministero-salute/it-fse-support) - Pagina di supporto FSE 2.0
+- [*it-fse-landing*](https://github.com/ministero-salute/it-fse-landing) - Landing page dei repository FSE 2.0
