@@ -193,7 +193,7 @@ services:
       it-fse-srv-log-ingestion:
         condition: service_healthy
     healthcheck:
-      test: "curl --fail --silent localhost:8080/status | grep UP || exit 1"
+      test: "curl --fail localhost:8080/fhir/metadata | grep \"status\" || exit 1"
       interval: 20s
       retries: 20
       start_period: 20s
