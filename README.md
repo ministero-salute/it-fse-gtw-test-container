@@ -13,6 +13,9 @@ Sono attualmente presenti i seguenti container
 | Versione *Lite* | [it-fse-container-lite](https://github.com/ministero-salute/it-fse-gtw-test-container/tree/main/it-fse-container-lite) | La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad effettuare la validazione di un documento CDA2 e la sua trasformazione in Bundle FHIR |
 | Versione *Full* | [it-fse-container-full](https://github.com/ministero-salute/it-fse-gtw-test-container/tree/main/it-fse-container-full) | La seguente versione contiene tutti i microservizi di **Gateway** ed **EDS** ad oggi sviluppati. |
 
+<font color="red">**N.B.**</font>  
+Al momento è possibile avviare solo la versione *lite*. Sarà possibile avviare quella *full* non appena sarà terminata la pubblicazione (in corso) di tutti i repository referenziati.
+
 <br/>
 
 ## Requisiti:
@@ -32,7 +35,7 @@ Fare riferimento al `readme.md` specifico dei singoli container per informazioni
 <br/>
 
 ## Test:
-All'interno della directory `tests` sono presenti alcuni test cases da poter  necessario:
+All'interno della directory `tests` sono presenti alcuni test case, per poterli esegure è necessario:
 * Visual Studio Code
 * Estensione REST Client
 * Creare un file `.env` copiando il contenuto del file `.env-sample` presente nella directory `tests` 
