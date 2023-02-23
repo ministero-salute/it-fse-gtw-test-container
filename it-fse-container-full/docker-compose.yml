@@ -6,7 +6,7 @@ services:
     volumes:
       - ./mongo/:/docker-entrypoint-initdb.d/:ro
       - ../mongo-dump:/var/lib/mongo/data
-    restart: always
+    restart: unless-stopped
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -15,8 +15,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 22181:2181
-    restart: always
-  
+    restart: unless-stopped
+
   kafka:
     image: confluentinc/cp-kafka:latest
     ports:
@@ -30,21 +30,19 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
-    restart: always
+    restart: unless-stopped
   
   kafka-ui:
     image: provectuslabs/kafka-ui
     ports:
       - 8081:8081
-    depends_on:
-      - kafka
     environment:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
       - SERVER_PORT=8081
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
   
   # MICROSERVIZI EDS
   
@@ -61,12 +59,12 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9097:9097
     healthcheck:
       test: "curl --fail --silent localhost:9097/status | grep UP || exit 1"
-      interval: 40s
+      interval: 10s
       retries: 20
       start_period: 20s
       timeout: 10s
@@ -84,7 +82,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9088:9088
     depends_on:
@@ -110,7 +108,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9086:9086
     depends_on:
@@ -136,7 +134,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9100:9100
     depends_on:
@@ -162,7 +160,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9085:9085
     depends_on:
@@ -188,7 +186,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8080:8080
     depends_on:
@@ -214,7 +212,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9091:9091
     depends_on:
@@ -240,7 +238,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9093:9093
     depends_on:
@@ -266,7 +264,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9089:9089
     depends_on:
@@ -292,7 +290,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9087:9087
     depends_on:
@@ -320,7 +318,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8011:8011
     depends_on:
@@ -346,7 +344,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8021:8021
     depends_on:
@@ -372,7 +370,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8018:8018
     depends_on:
@@ -398,7 +396,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8020:8020
     depends_on:
@@ -424,7 +422,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8012:8012
     depends_on:
@@ -450,7 +448,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8013:8013
     depends_on:
@@ -476,7 +474,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8019:8019
     depends_on:
@@ -502,7 +500,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8017:8017
     depends_on:
@@ -528,7 +526,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8014:8014
     depends_on:
@@ -554,7 +552,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8022:8022
     depends_on:
@@ -580,7 +578,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8016:8016
     depends_on:
@@ -608,7 +606,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8015:8015
     depends_on:
@@ -634,7 +632,7 @@ services:
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8010:8010
     depends_on:
