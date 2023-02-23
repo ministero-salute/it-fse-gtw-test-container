@@ -15,12 +15,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 22181:2181
-    healthcheck:
-      test: "curl --fail --silent localhost:8080/commands/ruok | grep -q '\"error\" : null'"
-      interval: 5s
-      retries: 20
-      start_period: 10s
-      timeout: 10s
     restart: unless-stopped
 
   kafka:
@@ -36,24 +30,12 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
-    depends_on:
-      zookeeper:
-        condition: service_healthy
-    healthcheck:
-      test: nc -z localhost 9092 || exit -1
-      interval: 5s
-      retries: 20
-      start_period: 10s
-      timeout: 10s
     restart: unless-stopped
   
   kafka-ui:
     image: provectuslabs/kafka-ui
     ports:
       - 8081:8081
-    depends_on:
-      kafka:
-        condition: service_healthy
     environment:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
@@ -80,9 +62,6 @@ services:
     restart: unless-stopped
     ports:
       - 9097:9097
-    depends_on:
-      kafka:
-        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:9097/status | grep UP || exit 1"
       interval: 10s
