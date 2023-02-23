@@ -32,6 +32,18 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
     restart: unless-stopped
   
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    ports:
+      - 8081:8081
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
+      - SERVER_PORT=8081
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+  
   ##MICROSERVIZI
   
   it-fse-srv-log-ingestion:
