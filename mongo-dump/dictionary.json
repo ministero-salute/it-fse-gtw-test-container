@@ -1,344 +1,12 @@
 [{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d34"
-  },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.9",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834535145"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1510700400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d35"
-  },
-  "system": "2.16.840.1.113883.2.9.10.1.4.3.4.5",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834543447"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d36"
-  },
-  "system": "2.16.840.1.113883.5.84",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834598733"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d37"
-  },
-  "system": "2.16.840.1.113883.5.83",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834597355"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d38"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.2",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834569941"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1560981600000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d39"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.54.4",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834552215"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3a"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.54.6",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834555263"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3b"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.12",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834560738"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3c"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.17",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834567297"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3d"
-  },
-  "system": "2.16.840.1.113883.11.22.17",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834523700"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1499119200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3e"
-  },
-  "system": "2.16.840.1.113883.1.11.19700",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834518769"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1395788400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d3f"
-  },
-  "system": "1.2.840.10008.2.16.4",
-  "version": "01",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834508576"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d40"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.54.2",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834551028"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d41"
-  },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.12",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834531212"
-    }
-  },
-  "release_date": null,
-  "whitelist": true,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d42"
-  },
-  "system": "2.16.840.1.113883.2.9.5.1.4",
-  "version": "7.0.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834536625"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1576364400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d43"
-  },
-  "system": "2.16.840.1.113883.5.129",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834591457"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1534024800000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d44"
-  },
-  "system": "2.16.840.1.113883.2.9.5.2.8",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834542144"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d45"
-  },
-  "system": "2.16.840.1.113883.5.1052",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834584202"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d46"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.14",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834563374"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d47"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.15",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834564823"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d48"
+    "$oid": "63fdef4b2750dd09777fc015"
   },
   "system": "1.3.6.1.4.1.12009.10.1.1694",
   "version": "2.73",
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834605917"
+      "$numberLong": "1677585823947"
     }
   },
   "release_date": {
@@ -350,41 +18,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d49"
-  },
-  "system": "2.16.840.1.113883.6.73",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834602330"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d4a"
-  },
-  "system": "2.16.840.1.113883.2.9.6.2.7",
-  "version": "1.0.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834556486"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d4b"
+    "$oid": "63fdef4b2750dd09777fc016"
   },
   "system": "2.16.840.1.113883.5.1063",
   "version": "2.1.0",
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834585621"
+      "$numberLong": "1677585798274"
     }
   },
   "release_date": {
@@ -396,253 +36,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d4c"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.54.5",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834553729"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d4d"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.51",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834548322"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d4e"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.9",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834579239"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d4f"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.13",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834562060"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d50"
-  },
-  "system": "2.16.840.1.113883.2.9.5.1.88",
-  "version": "2.0.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834538632"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d51"
-  },
-  "system": "2.16.840.1.113883.5.4",
-  "version": "7.0.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834594600"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1576364400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d52"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.11",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834559054"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d53"
-  },
-  "system": "2.16.840.1.113883.1.11.12839",
-  "version": "2.0.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834517387"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1395788400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d54"
-  },
-  "system": "2.16.840.1.113883.11.22.36",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834524894"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1495490400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d55"
-  },
-  "system": "2.16.840.1.113883.5.112",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834589794"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d56"
-  },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.10",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834528714"
-    }
-  },
-  "release_date": null,
-  "whitelist": true,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d57"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.5",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834573604"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d58"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.18",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834568600"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d59"
-  },
-  "system": "2.16.840.1.113883.5.25",
-  "version": "2.2.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834593043"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1576364400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d5a"
+    "$oid": "63fdef4b2750dd09777fc017"
   },
   "system": "2.16.840.1.113883.11.22.61",
   "version": null,
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834526181"
+      "$numberLong": "1677585677343"
     }
   },
   "release_date": {
@@ -654,113 +54,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d5b"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.54.1",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834549803"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d5c"
-  },
-  "system": "2.16.840.1.113883.11.22.15",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834522393"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1490997600000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d5d"
-  },
-  "system": "2.16.840.1.113883.11.22.9",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834527500"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1490738400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d5e"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.6",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834574884"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d5f"
-  },
-  "system": "2.16.840.1.113883.2.9.5.2.2",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834540412"
-    }
-  },
-  "release_date": null,
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d60"
-  },
-  "system": "2.16.840.1.113883.5.1",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834582484"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d61"
+    "$oid": "63fdef4b2750dd09777fc018"
   },
   "system": "2.16.840.1.113883.2.9.77.22.11.10",
   "version": null,
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834557707"
+      "$numberLong": "1677585706140"
     }
   },
   "release_date": {
@@ -772,99 +72,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d62"
+    "$oid": "63fdef4b2750dd09777fc019"
   },
-  "system": "2.16.840.1.113883.5.7",
-  "version": "2.1.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834596008"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1553036400000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d63"
-  },
-  "system": "2.16.840.1.113883.6.1",
-  "version": "2.73",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834607824"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1659909600000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d64"
-  },
-  "system": "2.16.840.1.113883.11.22.12",
+  "system": "2.16.840.1.113883.2.9.10.1.4.3.4.5",
   "version": null,
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834520041"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1490824800000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d65"
-  },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.13",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834532567"
-    }
-  },
-  "release_date": null,
-  "whitelist": true,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d66"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.48",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834544855"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1636498800000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d67"
-  },
-  "system": "2.16.840.1.113883.6.103",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834600341"
+      "$numberLong": "1677585688345"
     }
   },
   "release_date": null,
@@ -872,99 +86,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d68"
+    "$oid": "63fdef4b2750dd09777fc01a"
   },
-  "system": "2.16.840.1.113883.2.9.77.22.11.4",
+  "system": "2.16.840.1.113883.2.9.6.1.54.5",
   "version": null,
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834572279"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d69"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.7",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834576186"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d6a"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.3",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834571086"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d6b"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.8",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834577675"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1648764000000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d6c"
-  },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.11",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834530064"
-    }
-  },
-  "release_date": null,
-  "whitelist": true,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d6d"
-  },
-  "system": "2.16.840.1.113883.2.9.6.1.5",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834546402"
+      "$numberLong": "1677585700071"
     }
   },
   "release_date": null,
@@ -972,81 +100,13 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d6e"
+    "$oid": "63fdef4b2750dd09777fc01b"
   },
-  "system": "2.16.840.1.113883.2.9.1.11.1.2.4",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834533845"
-    }
-  },
-  "release_date": null,
-  "whitelist": true,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d6f"
-  },
-  "system": "2.16.840.1.113883.2.9.77.22.11.16",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834566053"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1649023200000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d70"
-  },
-  "system": "2.16.840.1.113883.1.11.1",
-  "version": null,
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834511259"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1466632800000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d71"
-  },
-  "system": "2.16.840.1.113883.4.642.3.912",
-  "version": "4.3.0",
-  "creation_date": {
-    "$date": {
-      "$numberLong": "1669834580705"
-    }
-  },
-  "release_date": {
-    "$date": {
-      "$numberLong": "1653688800000"
-    }
-  },
-  "whitelist": false,
-  "deleted": false
-},{
-  "_id": {
-    "$oid": "6387a79c749fb4281def4d72"
-  },
-  "system": "2.16.840.1.113883.5.111",
+  "system": "2.16.840.1.113883.5.25",
   "version": "2.2.0",
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834587718"
+      "$numberLong": "1677585806022"
     }
   },
   "release_date": {
@@ -1058,18 +118,942 @@
   "deleted": false
 },{
   "_id": {
-    "$oid": "6387a79c749fb4281def4d73"
+    "$oid": "63fdef4b2750dd09777fc01c"
   },
-  "system": "1.3.6.1.4.1.12009.10.1.1356",
+  "system": "1.2.840.10008.2.16.4",
+  "version": "01",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585659410"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc01d"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.7",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585729458"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc01e"
+  },
+  "system": "2.16.840.1.113883.5.84",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677586236254"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1572562800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc01f"
+  },
+  "system": "2.16.840.1.113883.2.9.1.11.1.2.9",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585680696"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1510700400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc020"
+  },
+  "system": "2.16.840.1.113883.11.22.17",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585673783"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1499119200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc021"
+  },
+  "system": "2.16.840.1.113883.2.9.1.11.1.2.13",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585834257"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1668639600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc022"
+  },
+  "system": "2.16.840.1.113883.11.22.12",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585670128"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1490824800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc023"
+  },
+  "system": "2.16.840.1.113883.5.7",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585810600"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc024"
+  },
+  "system": "2.16.840.1.113883.1.11.1",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585664383"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1466632800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc025"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.51",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585693620"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc026"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.9",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585732585"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc027"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.4",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585724793"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc028"
+  },
+  "system": "2.16.840.1.113883.5.1052",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585738361"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc029"
+  },
+  "system": "2.16.840.1.113883.2.9.1.11.1.2.11",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585832455"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1668639600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02a"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.54.2",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585697149"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02b"
+  },
+  "system": "2.16.840.1.113883.5.129",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585804055"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1534024800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02c"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.18",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585720107"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02d"
+  },
+  "system": "2.16.840.1.113883.1.11.19700",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585668605"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1395788400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02e"
+  },
+  "system": "2.16.840.1.113883.5.111",
+  "version": "2.2.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585799902"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1576364400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc02f"
+  },
+  "system": "2.16.840.1.113883.2.9.5.1.88",
+  "version": "2.0.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585683589"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc030"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.2",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585721784"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1560981600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc031"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.3",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585723122"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc032"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.6",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585727614"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc033"
+  },
+  "system": "2.16.840.1.113883.5.1",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585735661"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc034"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.15",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585714644"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc035"
+  },
+  "system": "2.16.840.1.113883.5.4",
+  "version": "7.0.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585807774"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1576364400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc036"
+  },
+  "system": "2.16.840.1.113883.6.73",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585819329"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc037"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.8",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585731035"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc038"
+  },
+  "system": "2.16.840.1.113883.5.112",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585802647"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc039"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.13",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585710920"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03a"
+  },
+  "system": "2.16.840.1.113883.11.22.9",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585678942"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1490738400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03b"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.14",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585713038"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03c"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.11",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585707932"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03d"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.54.4",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585698759"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03e"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.48",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585689680"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1636498800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc03f"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.54.1",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585695422"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc040"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.12",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585709485"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc041"
+  },
+  "system": "2.16.840.1.113883.6.1",
   "version": "2.73",
   "creation_date": {
     "$date": {
-      "$numberLong": "1669834604140"
+      "$numberLong": "1677585826580"
     }
   },
   "release_date": {
     "$date": {
       "$numberLong": "1659909600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc042"
+  },
+  "system": "2.16.840.1.113883.2.9.6.2.7",
+  "version": "1.0.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585703062"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc043"
+  },
+  "system": "2.16.840.1.113883.2.9.5.2.2",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585684899"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc044"
+  },
+  "system": "2.16.840.1.113883.11.22.36",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585675556"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1495490400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc045"
+  },
+  "system": "2.16.840.1.113883.2.9.5.2.8",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585686847"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc046"
+  },
+  "system": "2.16.840.1.113883.4.642.3.912",
+  "version": "4.3.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585733891"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1653688800000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc047"
+  },
+  "system": "2.16.840.1.113883.11.22.15",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585671798"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1490997600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc048"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.16",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585716916"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc049"
+  },
+  "system": "2.16.840.1.113883.2.9.5.1.4",
+  "version": "7.0.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585682068"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1576364400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04a"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.54.6",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585701601"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04b"
+  },
+  "system": "2.16.840.1.113883.1.11.12839",
+  "version": "2.0.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585666338"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1395788400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04c"
+  },
+  "system": "2.16.840.1.113883.6.103",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585817192"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04d"
+  },
+  "system": "2.16.840.1.113883.5.83",
+  "version": "2.1.0",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585813265"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1553036400000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04e"
+  },
+  "system": "2.16.840.1.113883.2.9.6.1.5",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585691267"
+    }
+  },
+  "release_date": null,
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc04f"
+  },
+  "system": "1.3.6.1.4.1.12009.10.1.1356",
+  "version": "2.73",
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585821784"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1659909600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc050"
+  },
+  "system": "2.16.840.1.113883.2.9.1.11.1.2.10",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585828212"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1670367600000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc051"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.17",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585718658"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1649023200000"
+    }
+  },
+  "whitelist": false,
+  "deleted": false
+},{
+  "_id": {
+    "$oid": "63fdef4b2750dd09777fc052"
+  },
+  "system": "2.16.840.1.113883.2.9.77.22.11.5",
+  "version": null,
+  "creation_date": {
+    "$date": {
+      "$numberLong": "1677585726172"
+    }
+  },
+  "release_date": {
+    "$date": {
+      "$numberLong": "1648764000000"
     }
   },
   "whitelist": false,
