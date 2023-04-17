@@ -17,9 +17,19 @@ Sono attualmente presenti i seguenti container
 <br/>
 
 ## Requisiti:
+CPU Consigliata
+* Intel Core i7 
+* AMD Ryzen 7
+* CPU equivalenti
+
+MEMORIA Consigliata
+* 16 GiB di RAM [Versione *Lite*]
+* 32 GiB di RAM [Versione *Full*]
+
+TOOLS 
 * docker
 * docker-compose
-* 16 GiB di RAM
+
 
 <br/>
 
