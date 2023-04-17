@@ -55,6 +55,16 @@ Al termine dell'installazione di `REST Client` sarà possibile avviare i servizi
 
 <br/>
 
+## Troubleshooting:
+Per effettuare una pulizia completa dei container seguire i seguenti passi:
+* Eliminare su 'Containers' tutti i container relativi a FSE (full e lite)
+* Eliminare su 'Images' le seguenti immagini
+    * it-fse-ms-runner
+    * confluentinc/cp-kafka
+* Eliminare su 'Volumes' i volumi non più in uso, con Status '-' 
+
+<br/>
+
 ## Repos
 - [*it-fse-support*](https://github.com/ministero-salute/it-fse-support) - Pagina di supporto FSE 2.0
 - [*it-fse-landing*](https://github.com/ministero-salute/it-fse-landing) - Landing page dei repository FSE 2.0
