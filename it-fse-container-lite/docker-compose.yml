@@ -1,11 +1,12 @@
 services:
   mongo:
-    image: docker.io/mongo:4.2
+    build:
+      context: .
+      dockerfile: ./mongo/Dockerfile
     ports:
       - '27888:27017'
     volumes:
-      - ./mongo/:/docker-entrypoint-initdb.d/:ro
-      - ../mongo-dump:/var/lib/mongo/data
+      - ./mongo/:/docker-entrypoint-initdb.d/:rw
     restart: unless-stopped
   
   zookeeper:
