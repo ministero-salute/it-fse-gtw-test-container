@@ -40,7 +40,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-antivirus-client.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8081
     volumes: 
       - mvn-cache:/root/.m2
@@ -68,7 +68,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-certificateauthority-client.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8082
     volumes: 
       - mvn-cache:/root/.m2
@@ -96,7 +96,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-notifier.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8083
     volumes: 
       - mvn-cache:/root/.m2
@@ -124,7 +124,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-requests.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8084
     volumes: 
       - mvn-cache:/root/.m2
@@ -151,7 +151,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-users.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8085
     volumes: 
       - mvn-cache:/root/.m2
@@ -179,7 +179,7 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-orchestrator.git
-      BRANCH: release
+      BRANCH: feature/fleming
       PORT: 8080
     volumes: 
       - mvn-cache:/root/.m2
@@ -217,8 +217,8 @@ services:
       context: ./it-fse-prov-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-server-ca.git
-      BRANCH: release
-      PORT: 9080
+      BRANCH: feature/fleming
+      PORT: 9000
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "bridge"
@@ -226,9 +226,9 @@ services:
       - "host.docker.internal:host-gateway"
     restart: always
     ports:
-      - 9080:9080
+      - 9000:9000
     healthcheck:
-      test: "curl --fail --silent localhost:9080/status | grep UP || exit 1"
+      test: "curl --fail --silent localhost:9000/status | grep UP || exit 1"
       interval: 40s
       retries: 20
       start_period: 20s
