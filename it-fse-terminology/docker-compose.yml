@@ -43,9 +43,9 @@ services:
   ##MICROSERVIZI
   
   it-fse-srv-policy-manager:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-policy-manager.git
       BRANCH: ${CURRENT_BRANCH}
@@ -71,9 +71,9 @@ services:
         condition: service_started
 
   it-fse-prov-be-notifier:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-prov-be-notifier.git
       BRANCH: ${CURRENT_BRANCH}
@@ -99,9 +99,9 @@ services:
         condition: service_started
 
   it-fse-srv-converter:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-converter.git
       BRANCH: ${CURRENT_BRANCH}
@@ -122,9 +122,9 @@ services:
       timeout: 10s
   
   it-fse-srv-dictionary:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-dictionary.git
       BRANCH: ${CURRENT_BRANCH}
@@ -148,9 +148,9 @@ services:
         condition: service_started
   
   it-fse-srv-log-ingestion:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-dictionary.git
       BRANCH: ${CURRENT_BRANCH}
@@ -176,9 +176,9 @@ services:
         condition: service_started
 
   it-fse-srv-predictive-maintainer:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-predictive-maintainer.git
       BRANCH: ${CURRENT_BRANCH}
@@ -204,9 +204,9 @@ services:
         condition: service_started
       
   it-fse-srv-query:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-query.git
       BRANCH: ${CURRENT_BRANCH}
@@ -230,9 +230,9 @@ services:
         condition: service_started
 
   it-fse-srv-terminology-server:
-    image: it-fse-ms-runner
+    image: term-runner
     build:
-      context: ./../it-fse-ms-runner/
+      context: ./term-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-terminology-server.git
       BRANCH: ${CURRENT_BRANCH}
