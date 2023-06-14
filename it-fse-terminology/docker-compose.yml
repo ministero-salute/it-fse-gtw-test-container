@@ -70,5 +70,190 @@ services:
       oracle-xe:
         condition: service_started
 
+  it-fse-prov-be-notifier:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-notifier.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 8083
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 8083:8083
+    healthcheck:
+      test: "curl --fail --silent localhost:8083/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+
+  it-fse-srv-converter:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-converter.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 8010
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 8010:8010
+    healthcheck:
+      test: "curl --fail --silent localhost:8010/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+  
+  it-fse-srv-dictionary:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-dictionary.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 9088
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 9088:9088
+    healthcheck:
+      test: "curl --fail --silent localhost:9088/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      mongo:
+        condition: service_started
+  
+  it-fse-srv-log-ingestion:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-dictionary.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 9097
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 9097:9097
+    healthcheck:
+      test: "curl --fail --silent localhost:9097/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      mongo:
+        condition: service_started
+      kafka:
+        condition: service_started
+
+  it-fse-srv-predictive-maintainer:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-predictive-maintainer.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 10001
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 10001:10001
+    healthcheck:
+      test: "curl --fail --silent localhost:10001/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      mongo:
+        condition: service_started
+      kafka:
+        condition: service_started
+      
+  it-fse-srv-query:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-query.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 9091
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 9091:9091
+    healthcheck:
+      test: "curl --fail --silent localhost:9091/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      mongo:
+        condition: service_started
+
+  it-fse-srv-terminology-server:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-srv-terminology-server.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 8080
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      oracle-xe:
+        condition: service_started
+
 volumes:
   mvn-cache:
