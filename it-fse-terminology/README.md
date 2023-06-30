@@ -60,4 +60,10 @@ Ecco la tabella aggiornata con le rispettive richieste curl per ogni microserviz
 | it-fse-srv-terminology-server          | Terminology server                                                | 8080   | oracle-xe                    | curl -X GET 'http://localhost:8080/fhir/metadata' -H 'accept: application/json'                                                                                         |
 
 Ogni microservizio ha la sua immagine Docker associata, viene costruito utilizzando il contesto `./term-runner/` e viene eseguito in un ambiente di rete `bridge`.
+
+## Authoring
+Per il caricamento delle terminologie sul server fhir e per la cancellazione sono esposte dal microservizio dictionary delle api che permetteranno all'utente anche tramite due csv ad hoc di creare opportni codeSystem. Tali api sono esposte secondo standard ModI.
+Per l'invocazione quindi è necessaria la creazione di due token jwt (E' possibile sfruttare il jar messo a disposizione https://github.com/ministero-salute/it-fse-gtw-tools/tree/feature/fleming/jwt-generator)
+
+
  
