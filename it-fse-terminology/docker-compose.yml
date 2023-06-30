@@ -105,7 +105,7 @@ services:
     environment:
       URL: ${REPO_BASE_URL}/it-fse-srv-converter.git
       BRANCH: ${CURRENT_BRANCH}
-      PORT: 8010
+      PORT: 8100
     volumes: 
       - mvn-cache:/root/.m2
     network_mode: "bridge"
@@ -113,9 +113,9 @@ services:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
-      - 8010:8010
+      - 8100:8100
     healthcheck:
-      test: "curl --fail --silent localhost:8010/status | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8100/status | grep UP || exit 1"
       interval: 40s
       retries: 20
       start_period: 20s
@@ -221,6 +221,32 @@ services:
       - 9091:9091
     healthcheck:
       test: "curl --fail --silent localhost:9091/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      mongo:
+        condition: service_started
+
+  it-fse-gtw-exporter:
+    image: term-runner
+    build:
+      context: ./term-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-gtw-exporter.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 18080
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - 18080:18080
+    healthcheck:
+      test: "curl --fail --silent localhost:18080/status | grep UP || exit 1"
       interval: 40s
       retries: 20
       start_period: 20s

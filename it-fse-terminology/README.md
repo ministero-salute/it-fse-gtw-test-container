@@ -1,24 +1,20 @@
 # Fascicolo Sanitario 2.0
 
-# _it-fse-gtw-test-container_
+# _it-fse-terminology_
 
-In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale *lite* del **gateway** di FSE 2.0.
-
-La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad invocare i seguenti endpoint 
-  * POST `/documents/validation`: il servizio consentirà di validare il documento CDA2 fornito in input.
-  * POST `/documents`: il servizio consentirà di trasformare il documento CDA2 fornito in input in Bundle FHIR.
-  * GET `/status`: il servizio consentirà di conoscere lo stato della transazione fornendo in input il workflowInstanceId o il traceID.
+In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale del **terminology-server** di FSE 2.0.
+ 
 
 <br/>
 
-[<img src="../img/container-lite.png" width="75%" style="display: block; margin: 0 auto" />](container-lite.png)
+[<img src="../img/archietturaTerminology.png" width="75%" style="display: block; margin: 0 auto" />](archietturaTerminology.png)
 
 <br/>
 
 ## Preparazione:
 
 Per prima cosa è **necessario** creare un file `.env` copiando il file `.env-sample` presente nella directory corrente. 
-Il file è opportunamente inizializzato con il `REPO_BASE_URL` e il `CURRENT_BRANCH` da cui scaricare il codice dei microservizi del gateway.
+Il file è opportunamente inizializzato con il `REPO_BASE_URL` e il `CURRENT_BRANCH` da cui scaricare il codice dei microservizi del terminology-server.
 
 Ad esempio:
 
@@ -27,46 +23,41 @@ Ad esempio:
 
 <br/>
 
+
 ## Avvio:
 
-Per avviare i container che compongono il Gateway è sufficiente posizionarsi da terminale nella directory contenente il file `docker-compose.yaml` e lanciare il comando 
+Per avviare i container che compongono il Terminology-server è sufficiente posizionarsi da terminale nella directory `it-fse-terminology` contenente il file `docker-compose.yaml` e lanciare il comando 
 
     docker-compose up
 
-Verranno create le immagini e messi in esecuzione i container che compongono il gateway.
+Verranno create le immagini e messi in esecuzione i container che compongono il terminology.
 
 <br/>
 
-
-**N.B.** Il nome dei container generato è dipendente dal nome della directory in cui si trova il file docker-compose, in questo caso *it-fse-container-lite*
 
 Potrebbero essere necessari **alcuni minuti** perché il sistema sia pronto, durante il primo avvio in particolare vengono scaricati e compilati i sorgenti e le librerie delle dipendenze dei microservizi, questo può richiedere parecchio tempo.
+ 
 
 <br/>
+ 
 
-Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8010 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. È possibile inoltre consultare lo swagger al seguente link http://localhost:8080/fhir/swagger-ui/.
+## Microservizi
 
-<br/>
+Ecco la tabella aggiornata con le rispettive richieste curl per ogni microservizio:
 
-## Troubleshooting:
+## Microservizi
 
-Assicurarsi che tutti i container siano in stato **running** tramite GUI di `Docker Desktop` o tramite il comando
-    
-    docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.State}}"
+| Nome                                   | Descrizione                                                       | Porta  | Dipendenze                   | Comando curl                                                                                                                                                      |
+|----------------------------------------|-------------------------------------------------------------------|--------|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| it-fse-srv-policy-manager              | Gestisce la politica di accesso ai servizi del terminology         | 10000  | kafka, oracle-xe             | curl -X GET 'http://localhost:10000/status' -H 'accept: application/json'                                                                                       |
+| it-fse-prov-be-notifier                | Ha la responsabilità di inviare mail                               | 8083   | kafka, oracle-xe             | curl -X GET 'http://localhost:8083/status' -H 'accept: application/json'                                                                                         |
+| it-fse-srv-converter                   | Ha la responsabilità di convertire da e verso il FHIR le terminologie | 8100   | kafka                        | curl -X GET 'http://localhost:8100/status' -H 'accept: application/json'                                                                                         |
+| it-fse-srv-dictionary                  | Fornisce le API per l'upload di terminologie e URL per il web scraping                | 9088   | mongo                        | curl -X GET 'http://localhost:9088/status' -H 'accept: application/json'                                                                                         |
+| it-fse-srv-log-ingestion               | Ha la responsabilità di collezionare i log dei microservizi        | 9097   | mongo, kafka                 | curl -X GET 'http://localhost:9097/status' -H 'accept: application/json'                                                                                         |
+| it-fse-srv-predictive-maintainer       | Ha la responsabilità di scansionare i log strutturati e creare terminologie in automatico | 10001  | mongo, kafka                 | curl -X GET 'http://localhost:10001/status' -H 'accept: application/json'                                                                                       |
+| it-fse-srv-query                       | Ha come responsabilità quella di interfacciarsi con il terminology-server | 9091   | mongo                        | curl -X GET 'http://localhost:9091/status' -H 'accept: application/json'                                                                                         |
+| it-fse-gtw-exporter                    | Ha come responsabilità quella di esportare le terminologie su git | 18080  | mongo                        | curl -X GET 'http://localhost:18080/status' -H 'accept: application/json'                                                                                       |
+| it-fse-srv-terminology-server          | Terminology server                                                | 8080   | oracle-xe                    | curl -X GET 'http://localhost:8080/fhir/metadata' -H 'accept: application/json'                                                                                         |
 
-L'output atteso dal seguente comando è il seguente:
-
-| CONTAINER ID | NAMES | IMAGE | STATE |
-|--------------|-------|-------|-------|
-|f84330c03b5b  | it-fse-gtw-container-lite-it-fse-gtw-status-check-1        | it-fse-ms-runner                  | running
-|395d5024e63b  | it-fse-gtw-container-lite-it-fse-gtw-dispatcher-1          | it-fse-ms-runner                  | running
-|2b33b4bf4504  | it-fse-gtw-container-lite-it-fse-gtw-fhir-mapping-engine-1 | it-fse-ms-runner                  | running
-|ba7aa381fb61  | it-fse-gtw-container-lite-it-fse-gtw-status-manager-1      | it-fse-ms-runner                  | running
-|cb102c0be90e  | it-fse-gtw-container-lite-it-fse-gtw-validator-1           | it-fse-ms-runner                  | running
-|1de45c7e315c  | it-fse-gtw-container-lite-it-fse-srv-log-ingestion-1       | it-fse-ms-runner                  | running
-|3f1ef0f0fa94  | it-fse-gtw-container-lite-mongo-1                          | mongo:4.2                         | running
-|3fb5f91d61a3  | it-fse-gtw-container-lite-kafka-1                          | confluentinc/cp-kafka:6.2.1       | running
-|b561e8c7a241  | it-fse-gtw-container-lite-zookeeper-1                      | confluentinc/cp-zookeeper:latest  | running
-|
-
-<br/>
+Ogni microservizio ha la sua immagine Docker associata, viene costruito utilizzando il contesto `./term-runner/` e viene eseguito in un ambiente di rete `bridge`.
+ 
