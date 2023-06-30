@@ -7,13 +7,12 @@ services:
       - ./oracle-xe/:/docker-entrypoint-initdb.d/:ro
     restart: always
   mongo:
-    build:
-      context: .
-      dockerfile: ./mongo/Dockerfile
+    image: docker.io/mongo:4.2
     ports:
       - '27888:27017'
     volumes:
-      - ./mongo/:/docker-entrypoint-initdb.d/:rw
+      - ./mongo/:/docker-entrypoint-initdb.d/:ro
+      - ../mongo-dump:/var/lib/mongo/data
     restart: unless-stopped
   
   zookeeper:
