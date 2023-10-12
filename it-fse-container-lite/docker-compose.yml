@@ -7,6 +7,12 @@ services:
       - ./mongo/:/docker-entrypoint-initdb.d/:ro
       - ../mongo-dump:/var/lib/mongo/data
     restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
   
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -56,6 +62,9 @@ services:
       PORT: 9097
     volumes: 
       - mvn-cache:/root/.m2
+    depends_on:
+      mongo:
+        condition: service_healthy
     network_mode: "bridge"
     extra_hosts:       
       - "host.docker.internal:host-gateway"
@@ -86,7 +95,7 @@ services:
     ports:
       - 8022:8022
     depends_on:
-      it-fse-srv-log-ingestion:
+      it-fse-gtw-rules-manager:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
@@ -215,6 +224,9 @@ services:
     restart: unless-stopped
     ports:
       - 8011:8011
+    depends_on:
+      it-fse-srv-log-ingestion:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8011/status | grep UP || exit 1"
       interval: 40s
