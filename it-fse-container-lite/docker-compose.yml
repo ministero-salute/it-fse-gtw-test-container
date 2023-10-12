@@ -1,3 +1,4 @@
+name: gtw-lite
 services:
   mongo:
     image: docker.io/mongo:4.2
