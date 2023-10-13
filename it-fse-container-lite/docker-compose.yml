@@ -47,8 +47,6 @@ services:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
       - SERVER_PORT=8081
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
   
   ##MICROSERVIZI
@@ -66,9 +64,6 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9097:9097
@@ -89,8 +84,7 @@ services:
       PORT: 8022
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
+    extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
@@ -115,9 +109,6 @@ services:
       PORT: 8012
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8012:8012
@@ -141,9 +132,6 @@ services:
       PORT: 8013
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8013:8013
@@ -167,9 +155,6 @@ services:
       PORT: 8017
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8017:8017
@@ -193,9 +178,6 @@ services:
       PORT: 8010
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8010:8010
@@ -219,9 +201,6 @@ services:
       PORT: 8011
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8011:8011

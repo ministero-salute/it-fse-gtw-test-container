@@ -47,8 +47,6 @@ services:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
       - SERVER_PORT=8081
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
   
   # MICROSERVIZI EDS
@@ -66,9 +64,6 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9097:9097
@@ -89,9 +84,6 @@ services:
       PORT: 9088
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9088:9088
@@ -115,9 +107,6 @@ services:
       PORT: 9086
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9086:9086
@@ -141,9 +130,6 @@ services:
       PORT: 9100
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9100:9100
@@ -167,9 +153,6 @@ services:
       PORT: 9085
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9085:9085
@@ -193,9 +176,6 @@ services:
       PORT: 8080
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8080:8080
@@ -219,9 +199,6 @@ services:
       PORT: 9091
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9091:9091
@@ -245,9 +222,6 @@ services:
       PORT: 9093
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9093:9093
@@ -271,9 +245,6 @@ services:
       PORT: 9089
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9089:9089
@@ -297,9 +268,6 @@ services:
       PORT: 9087
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 9087:9087
@@ -325,9 +293,6 @@ services:
       PORT: 8011
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8011:8011
@@ -351,9 +316,6 @@ services:
       PORT: 8021
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8021:8021
@@ -377,9 +339,6 @@ services:
       PORT: 8018
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8018:8018
@@ -403,9 +362,6 @@ services:
       PORT: 8020
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8020:8020
@@ -429,9 +385,6 @@ services:
       PORT: 8012
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8012:8012
@@ -455,9 +408,6 @@ services:
       PORT: 8013
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8013:8013
@@ -481,9 +431,6 @@ services:
       PORT: 8019
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8019:8019
@@ -507,9 +454,6 @@ services:
       PORT: 8017
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8017:8017
@@ -533,9 +477,6 @@ services:
       PORT: 8014
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8014:8014
@@ -559,9 +500,6 @@ services:
       PORT: 8022
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8022:8022
@@ -585,9 +523,6 @@ services:
       PORT: 8016
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8016:8016
@@ -613,9 +548,6 @@ services:
       PORT: 8015
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8015:8015
@@ -639,9 +571,6 @@ services:
       PORT: 8010
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8010:8010
