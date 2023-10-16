@@ -228,6 +228,8 @@ services:
     depends_on:
       it-fse-srv-query:
         condition: service_healthy
+      it-fse-datarepo-fhir-server:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:9093/status | grep UP || exit 1"
       interval: 40s
