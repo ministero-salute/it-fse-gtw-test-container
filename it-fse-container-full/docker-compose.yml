@@ -31,7 +31,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://host.docker.internal:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -45,7 +45,7 @@ services:
       - 8081:8081
     environment:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
       - SERVER_PORT=8081
     restart: unless-stopped
   
@@ -462,29 +462,6 @@ services:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8017/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-  
-  it-fse-gtw-fhir-mapping:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8014
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8014:8014
-    depends_on:
-      it-fse-gtw-rules-manager:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8014/status | grep UP || exit 1"
       interval: 40s
       retries: 20
       start_period: 20s
