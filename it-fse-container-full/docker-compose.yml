@@ -485,6 +485,8 @@ services:
     depends_on:
       it-fse-gtw-rules-manager:
         condition: service_healthy
+      it-fse-gtw-config:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
       interval: 40s
