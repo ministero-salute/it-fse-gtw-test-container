@@ -1,0 +1,253 @@
+version: '3.7'
+services:
+  oracle-xe:
+    image: wnameless/oracle-xe-11g-r2
+    ports:
+      - '1521:1521'
+    volumes:
+      - ./oracle-xe/:/docker-entrypoint-initdb.d/:ro
+    restart: always
+    
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    restart: always 
+
+  kafka:
+    image: confluentinc/cp-kafka:6.2.1
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://host.docker.internal:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
+    restart: always
+
+  ##MICROSERVIZI
+
+  it-fse-prov-be-antivirus-client:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-antivirus-client.git
+      BRANCH: feature/fleming
+      PORT: 8081
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8081:8081
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+        
+  it-fse-prov-be-certificateauthority-client:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-certificateauthority-client.git
+      BRANCH: feature/fleming
+      PORT: 8082
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8082:8082
+    healthcheck:
+      test: "curl --fail --silent localhost:8082/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+
+  it-fse-prov-be-notifier:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-notifier.git
+      BRANCH: feature/fleming
+      PORT: 8083
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8083:8083
+    healthcheck:
+      test: "curl --fail --silent localhost:8083/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+
+  it-fse-prov-be-requests:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-requests.git
+      BRANCH: feature/fleming
+      PORT: 8084
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8084:8084
+    healthcheck:
+      test: "curl --fail --silent localhost:8084/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+  it-fse-prov-be-users:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-users.git
+      BRANCH: feature/fleming
+      PORT: 8085
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8085:8085
+    healthcheck:
+      test: "curl --fail --silent localhost:8085/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+
+  it-fse-prov-be-orchestrator:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-orchestrator.git
+      BRANCH: feature/fleming
+      PORT: 8080
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+      it-fse-prov-be-antivirus-client:
+        condition: service_healthy
+      it-fse-prov-be-certificateauthority-client:
+        condition: service_healthy
+      it-fse-prov-be-notifier:
+        condition: service_healthy
+      it-fse-prov-be-requests:
+        condition: service_healthy
+      it-fse-prov-be-users:
+        condition: service_healthy
+
+  it-fse-prov-be-server-ca:
+    image: it-fse-prov-runner
+    build:
+      context: ./it-fse-prov-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-prov-be-server-ca.git
+      BRANCH: feature/fleming
+      PORT: 9000
+    volumes: 
+      - mvn-cache:/root/.m2
+    network_mode: "bridge"
+    extra_hosts:       
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - 9000:9000
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      kafka:
+        condition: service_started
+      oracle-xe:
+        condition: service_started
+      it-fse-prov-be-antivirus-client:
+        condition: service_healthy
+      it-fse-prov-be-certificateauthority-client:
+        condition: service_healthy
+      it-fse-prov-be-notifier:
+        condition: service_healthy
+      it-fse-prov-be-requests:
+        condition: service_healthy
+      it-fse-prov-be-users:
+        condition: service_healthy      
+
+volumes:
+  mvn-cache:
