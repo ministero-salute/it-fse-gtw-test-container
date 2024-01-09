@@ -8,10 +8,10 @@ In questo repository sono contenuti i container FSE che consentono di avviare is
 
 Sono attualmente presenti i seguenti container
 
-| TOOL | LINK | DESCRIPTION |
-| :------------: | :------------: | ------------ |
+|      TOOL       |                                                          LINK                                                          | DESCRIPTION                                                                                                                                                             |
+|:---------------:|:----------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Versione *Lite* | [it-fse-container-lite](https://github.com/ministero-salute/it-fse-gtw-test-container/tree/main/it-fse-container-lite) | La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad effettuare la validazione di un documento CDA2 e la sua trasformazione in Bundle FHIR |
-| Versione *Full* | [it-fse-container-full](https://github.com/ministero-salute/it-fse-gtw-test-container/tree/main/it-fse-container-full) | La seguente versione contiene tutti i microservizi di **Gateway** ed **EDS** ad oggi sviluppati. |
+| Versione *Full* | [it-fse-container-full](https://github.com/ministero-salute/it-fse-gtw-test-container/tree/main/it-fse-container-full) | La seguente versione contiene tutti i microservizi di **Gateway** ed **EDS** ad oggi sviluppati.                                                                        |
 
 
 <br/>
@@ -29,8 +29,8 @@ MEMORIA Consigliata
 TOOLS 
 * docker
 * docker-compose
-
-
+* python
+* python-dotenv
 <br/>
 
 ## Avvio:

@@ -1,3 +1,4 @@
+name: gtw-lite
 services:
   mongo:
     build:
@@ -8,6 +9,12 @@ services:
     volumes:
       - ./mongo/:/docker-entrypoint-initdb.d/:rw
     restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
   
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -25,7 +32,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://host.docker.internal:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -39,10 +46,8 @@ services:
       - 8081:8081
     environment:
       - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:29092
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
       - SERVER_PORT=8081
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
   
   ##MICROSERVIZI
@@ -57,9 +62,9 @@ services:
       PORT: 9097
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
+    depends_on:
+      mongo:
+        condition: service_healthy
     restart: unless-stopped
     ports:
       - 9097:9097
@@ -80,14 +85,11 @@ services:
       PORT: 8022
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8022:8022
     depends_on:
-      it-fse-srv-log-ingestion:
+      it-fse-gtw-rules-manager:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
@@ -106,9 +108,6 @@ services:
       PORT: 8012
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8012:8012
@@ -132,9 +131,6 @@ services:
       PORT: 8013
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8013:8013
@@ -158,9 +154,6 @@ services:
       PORT: 8017
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8017:8017
@@ -184,9 +177,6 @@ services:
       PORT: 8010
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8010:8010
@@ -210,12 +200,12 @@ services:
       PORT: 8011
     volumes: 
       - mvn-cache:/root/.m2
-    network_mode: "bridge"
-    extra_hosts:       
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
     ports:
       - 8011:8011
+    depends_on:
+      it-fse-srv-log-ingestion:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8011/status | grep UP || exit 1"
       interval: 40s

@@ -22,7 +22,20 @@ Ad esempio:
     REPO_BASE_URL="https://github.com/ministero-salute"
     CURRENT_BRANCH=main
 
-<br/>
+Successivamente, seguire i seguenti passaggi per la configurazione di Python:
+
+1. Installare [Python](https://www.python.org/downloads/)
+2. Aprire il prompt di comandi e digitare `pip install python-dotenv`
+
+Prima di avviare i container bisogna effetturare il download dei file JSON utili al riempimento del database Mongo.
+
+Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-lite`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
+* `schema.json`
+* `schematron.json`
+* `transform.json`
+* `terminology.json`
+
+Al termine dell'operazione sarà stata creata una cartella `mongo-dump` nella cartella root.
 
 ## Avvio:
 
@@ -53,32 +66,32 @@ Assicurarsi che tutti i container siano instato **running** tramite GUI di `Dock
 
 L'output atteso dal seguente comando è il seguente:
 
-| CONTAINER ID | NAMES | IMAGE | STATE |
-|--------------|-------|-------|-------|
-| 3b0d6d4cdfeb | it-fse-container-full-it-fse-gtw-dispatcher-1             | it-fse-ms-runner                  | running
-| 3425ded08129 | it-fse-container-full-it-fse-gtw-indexer-1                | it-fse-ms-runner                  | running
-| b6fe61f8793e | it-fse-container-full-it-fse-gtw-status-check-1           | it-fse-ms-runner                  | running
-| dcd93eda8566 | it-fse-container-full-it-fse-gtw-publisher-1              | it-fse-ms-runner                  | running
-| 68b458bfede1 | it-fse-container-full-it-fse-gtw-garbage-1                | it-fse-ms-runner                  | running
-| 2a52e676ec95 | it-fse-container-full-it-fse-gtw-validator-1              | it-fse-ms-runner                  | running
-| ebd5824bbf3f | it-fse-container-full-it-fse-gtw-ini-client-1             | it-fse-ms-runner                  | running
-| 2d33e7f0b44f | it-fse-container-full-it-fse-gtw-status-manager-1         | it-fse-ms-runner                  | running
-| b4c7863fbe97 | it-fse-container-full-it-fse-gtw-fhir-mapping-engine-1    | it-fse-ms-runner                  | running
-| 50dba0237700 | it-fse-container-full-it-fse-gtw-fhir-mapping-1           | it-fse-ms-runner                  | running
-| 877bdb4a2748 | it-fse-container-full-it-fse-gtw-eds-client-1             | it-fse-ms-runner                  | running
-| d5f08febd5ba | it-fse-container-full-it-fse-gtw-config-1                 | it-fse-ms-runner                  | running
-| 856930c725e4 | it-fse-container-full-it-fse-gtw-rules-manager-1          | it-fse-ms-runner                  | running
-| d8ebacdb4f2e | it-fse-container-full-it-fse-datarepo-processor-1         | it-fse-ms-runner                  | running
-| fbfc3acf7e16 | it-fse-container-full-it-fse-datarepo-data-quality-1      | it-fse-ms-runner                  | running
-| a6601b8722bb | it-fse-container-full-it-fse-srv-ingestion-1              | it-fse-ms-runner                  | running
-| f4a15cfc0439 | it-fse-container-full-it-fse-srv-dictionary-1             | it-fse-ms-runner                  | running
-| ef7f953e30b8 | it-fse-container-full-it-fse-datarepo-fhir-server-1       | it-fse-ms-runner                  | running
-| 3953607153d9 | it-fse-container-full-it-fse-srv-fhir-1                   | it-fse-ms-runner                  | running
-| 4896820f5885 | it-fse-container-full-it-fse-srv-syntax-rules-manager-1   | it-fse-ms-runner                  | running
-| f6c82592adfd | it-fse-container-full-it-fse-srv-semantic-rules-manager-1 | it-fse-ms-runner                  | running
-| ccaaf49acd24 | it-fse-container-full-it-fse-srv-query-1                  | it-fse-ms-runner                  | running
-| 6046edbee2c1 | it-fse-container-full-it-fse-srv-log-ingestion-1          | it-fse-ms-runner                  | running
-| 434b96967cb2 | it-fse-container-full-kafka-ui-1                          | provectuslabs/kafka-ui            | running
-| 8a493f0c40d1 | it-fse-container-full-mongo-1                             | mongo:4.2                         | running
-| 06da0d6edf65 | it-fse-container-full-zookeeper-1                         | confluentinc/cp-zookeeper:latest  | running
-| 72929eb90052 | it-fse-container-full-kafka-1                             | confluentinc/cp-kafka:latest      | running
+| CONTAINER ID | NAMES                                                     | IMAGE                            | STATE   |
+|--------------|-----------------------------------------------------------|----------------------------------|---------|
+| 3b0d6d4cdfeb | it-fse-container-full-it-fse-gtw-dispatcher-1             | it-fse-ms-runner                 | running |
+| 3425ded08129 | it-fse-container-full-it-fse-gtw-indexer-1                | it-fse-ms-runner                 | running |
+| b6fe61f8793e | it-fse-container-full-it-fse-gtw-status-check-1           | it-fse-ms-runner                 | running |
+| dcd93eda8566 | it-fse-container-full-it-fse-gtw-publisher-1              | it-fse-ms-runner                 | running |
+| 68b458bfede1 | it-fse-container-full-it-fse-gtw-garbage-1                | it-fse-ms-runner                 | running |
+| 2a52e676ec95 | it-fse-container-full-it-fse-gtw-validator-1              | it-fse-ms-runner                 | running |
+| ebd5824bbf3f | it-fse-container-full-it-fse-gtw-ini-client-1             | it-fse-ms-runner                 | running |
+| 2d33e7f0b44f | it-fse-container-full-it-fse-gtw-status-manager-1         | it-fse-ms-runner                 | running |
+| b4c7863fbe97 | it-fse-container-full-it-fse-gtw-fhir-mapping-engine-1    | it-fse-ms-runner                 | running |
+| 50dba0237700 | it-fse-container-full-it-fse-gtw-fhir-mapping-1           | it-fse-ms-runner                 | running |
+| 877bdb4a2748 | it-fse-container-full-it-fse-gtw-eds-client-1             | it-fse-ms-runner                 | running |
+| d5f08febd5ba | it-fse-container-full-it-fse-gtw-config-1                 | it-fse-ms-runner                 | running |
+| 856930c725e4 | it-fse-container-full-it-fse-gtw-rules-manager-1          | it-fse-ms-runner                 | running |
+| d8ebacdb4f2e | it-fse-container-full-it-fse-datarepo-processor-1         | it-fse-ms-runner                 | running |
+| fbfc3acf7e16 | it-fse-container-full-it-fse-datarepo-data-quality-1      | it-fse-ms-runner                 | running |
+| a6601b8722bb | it-fse-container-full-it-fse-srv-ingestion-1              | it-fse-ms-runner                 | running |
+| f4a15cfc0439 | it-fse-container-full-it-fse-srv-dictionary-1             | it-fse-ms-runner                 | running |
+| ef7f953e30b8 | it-fse-container-full-it-fse-datarepo-fhir-server-1       | it-fse-ms-runner                 | running |
+| 3953607153d9 | it-fse-container-full-it-fse-srv-fhir-1                   | it-fse-ms-runner                 | running |
+| 4896820f5885 | it-fse-container-full-it-fse-srv-syntax-rules-manager-1   | it-fse-ms-runner                 | running |
+| f6c82592adfd | it-fse-container-full-it-fse-srv-semantic-rules-manager-1 | it-fse-ms-runner                 | running |
+| ccaaf49acd24 | it-fse-container-full-it-fse-srv-query-1                  | it-fse-ms-runner                 | running |
+| 6046edbee2c1 | it-fse-container-full-it-fse-srv-log-ingestion-1          | it-fse-ms-runner                 | running |
+| 434b96967cb2 | it-fse-container-full-kafka-ui-1                          | provectuslabs/kafka-ui           | running |
+| 8a493f0c40d1 | it-fse-container-full-mongo-1                             | mongo:4.2                        | running |
+| 06da0d6edf65 | it-fse-container-full-zookeeper-1                         | confluentinc/cp-zookeeper:latest | running |
+| 72929eb90052 | it-fse-container-full-kafka-1                             | confluentinc/cp-kafka:latest     | running |
