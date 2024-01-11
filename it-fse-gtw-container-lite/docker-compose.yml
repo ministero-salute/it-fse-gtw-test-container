@@ -80,7 +80,7 @@ services:
       context: ./../it-fse-ms-runner/
     environment:
       URL: ${REPO_BASE_URL}/it-fse-gtw-config.git
-      BRANCH: feature/docker-props
+      BRANCH: ${CURRENT_BRANCH}
       PORT: 8018
     volumes: 
       - mvn-cache:/root/.m2
@@ -112,6 +112,8 @@ services:
       - 8022:8022
     depends_on:
       it-fse-gtw-rules-manager:
+        condition: service_healthy
+      it-fse-gtw-config:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
@@ -226,7 +228,7 @@ services:
     ports:
       - 8011:8011
     depends_on:
-      it-fse-srv-log-ingestion:
+      it-fse-gtw-config:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8011/status | grep UP || exit 1"
