@@ -136,6 +136,8 @@ services:
     depends_on:
       it-fse-srv-log-ingestion:
         condition: service_healthy
+      it-fse-gtw-config:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:9100/status | grep UP || exit 1"
       interval: 20s
@@ -534,6 +536,8 @@ services:
       - 8015:8015
     depends_on:
       it-fse-gtw-publisher:
+        condition: service_healthy
+      it-fse-gtw-config:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8015/status | grep UP || exit 1"
