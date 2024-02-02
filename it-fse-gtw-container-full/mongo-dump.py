@@ -8,7 +8,7 @@ load_dotenv()
 # VARIABLES
 MONGO_DUMP_URL = getenv("MONGO_DUMP_URL")
 FILES = ["schema.json", "schematron.json", "terminology.json", "transform.json"]
-FOLDER = "../mongo-dump"
+FOLDER = "./mongo-dump"
 
 # CHECK if folder already exists, if yes it will be deleted
 if(path.exists(FOLDER)):
