@@ -8,7 +8,8 @@ load_dotenv()
 # VARIABLES
 MONGO_DUMP_URL = getenv("MONGO_DUMP_URL")
 FILES = ["schema.json", "schematron.json", "terminology.json", "transform.json"]
-FOLDER = "../mongo-dump"
+SCRIPT_DIR = path.dirname(path.abspath(__file__))
+FOLDER = path.join(SCRIPT_DIR, "../mongo-dump")
 
 if MONGO_DUMP_URL is None:
     raise ValueError("MONGO_DUMP_URL environment variable is not set in .env")
