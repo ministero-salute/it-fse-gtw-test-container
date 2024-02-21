@@ -10,6 +10,9 @@ MONGO_DUMP_URL = getenv("MONGO_DUMP_URL")
 FILES = ["schema.json", "schematron.json", "terminology.json", "transform.json"]
 FOLDER = "../mongo-dump"
 
+if MONGO_DUMP_URL is None:
+    raise ValueError("MONGO_DUMP_URL environment variable is not set in .env")
+
 # CHECK if folder already exists, if yes it will be deleted
 if(path.exists(FOLDER)):
     rmtree(FOLDER)
