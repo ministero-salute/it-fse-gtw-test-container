@@ -38,6 +38,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
     restart: unless-stopped
+    depends_on:
+      zookeeper:
+        condition: service_started
   
   kafka-ui:
     image: provectuslabs/kafka-ui
@@ -48,6 +51,9 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
       - SERVER_PORT=8081
     restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_started
   
   ##MICROSERVIZI
   
@@ -70,9 +76,9 @@ services:
     healthcheck:
       test: "curl --fail --silent localhost:9097/status | grep UP || exit 1"
       interval: 10s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
+      retries: 40
+      start_period: 15m
+      timeout: 15s
 
   it-fse-gtw-config:
     image: it-fse-ms-runner
