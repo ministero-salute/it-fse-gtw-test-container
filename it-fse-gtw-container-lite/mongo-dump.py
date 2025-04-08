@@ -1,13 +1,20 @@
+from io import BytesIO
 from os import getenv, path, mkdir
 from shutil import rmtree
 from urllib.request import urlopen
 from dotenv import load_dotenv
+import gzip
 
 load_dotenv()
 
 # VARIABLES
 MONGO_DUMP_URL = getenv("MONGO_DUMP_URL")
-FILES = ["schema.json", "schematron.json", "terminology.json", "transform.json"]
+FILES = ["schema.json.gzip", 
+        "schematron.json.gzip",
+        "terminology.json.gzip",
+        "transform.json.gzip",
+        "engines.json.gzip"]
+
 SCRIPT_DIR = path.dirname(path.abspath(__file__))
 FOLDER = path.join(SCRIPT_DIR, "../mongo-dump")
 
@@ -33,10 +40,19 @@ for file in FILES:
     contents = urlopen(url)
     print(f" - {file} is downloaded.")
 
-    # OPEN the file e write on it
-    with open(f"{FOLDER}/{file}", "wb") as f:
+    # Read the compressed content
+    compressed_data = contents.read()
 
-        print(f" - {file} in writing...")
-        f.write(contents.read())
-        print(f" - {file} is written on disk.")
+    # Decompress the gzip content
+    with gzip.GzipFile(fileobj=BytesIO(compressed_data)) as gz:
+        decompressed_data = gz.read() 
+
+    # Save the decompressed data as .json
+    output_filename = file.replace(".gzip", "")
+
+    # OPEN the file and write on it
+    with open(f"{FOLDER}/{output_filename}", "wb") as f:
+        print(f" - {output_filename} in writing...")
+        f.write(decompressed_data)
+        print(f" - {output_filename} is written on disk.")
         f.close()
