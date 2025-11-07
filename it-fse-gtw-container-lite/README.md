@@ -34,6 +34,7 @@ Successivamente, seguire i seguenti passaggi per la configurazione di Python:
 Prima di avviare i container bisogna effetturare il download dei file JSON utili al riempimento del database Mongo.
 
 Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-lite`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
+* `config_data.json`
 * `schema.json`
 * `schematron.json`
 * `transform.json`
