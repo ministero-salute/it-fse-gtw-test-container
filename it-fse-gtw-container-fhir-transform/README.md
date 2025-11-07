@@ -5,12 +5,12 @@
 In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale dell'engine che trasfomra file CDA in FHIR.
 
 La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad invocare i seguenti endpoint
-* GET `/status`: Consente di conoscere lo stato della transazione fornendo in input il workflowInstanceId o il traceID.
 * POST `/v1/documents/transform/stateless/{engineId}/{objectId}`: Il servizio genera un Bundle tramite il FHIR Mapping Engine. engineId: identificativo dell’engine configurato nel database; objectId: identificativo della configurazione/mapping associato alla specifica tipologia di file CDA in input.
 * GET `/v1/engine/status`: Restituisce lo stato corrente degli engine disponibili per la trasformazione dei file CDA.
 * GET `/v1/engine/refresh`: Aggiorna la lista degli engine disponibili nel database.
+* GET `/status`: Consente di conoscere lo stato dell'applicazione
 
-**DISCLAIMER: Il json FHIR in output dal servizio di trasformazione non e' quello che verra' poi inserito all'interno del server.**
+**DISCLAIMER: Il json FHIR in output ottenuto dal servizio di trasformazione non e' la versione definitiva che verrà inserito all'interno del server fhir, in quanto la UAR applica ulteriori raffinamenti.**
 
 <br/>
 
@@ -36,7 +36,7 @@ Successivamente, seguire i seguenti passaggi per la configurazione di Python:
 
 Prima di avviare i container bisogna effetturare il download dei file JSON utili al riempimento del database Mongo.
 
-Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-lite`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
+Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-fhir-transform`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
 * `transform.json`
 * `engines.json`
 
@@ -53,7 +53,7 @@ Verranno create le immagini e messi in esecuzione i container che compongono il 
 <br/>
 
 
-**N.B.** Il nome dei container generato è dipendente dal nome della directory in cui si trova il file docker-compose, in questo caso *it-fse-container-lite*
+**N.B.** Il nome dei container generato è dipendente dal nome della directory in cui si trova il file docker-compose, in questo caso *it-fse-gtw-container-fhir-transform*
 
 Potrebbero essere necessari **alcuni minuti** perché il sistema sia pronto, durante il primo avvio in particolare vengono scaricati e compilati i sorgenti e le librerie delle dipendenze dei microservizi, questo può richiedere parecchio tempo.
 
@@ -76,6 +76,6 @@ L'output atteso dal seguente comando è il seguente:
 | 2b33b4bf4504 | it-fse-gtw-fhir-transform-it-fse-gtw-config-1              | it-fse-ms-runner                 | running |
 | 2b33b4bf4504 | it-fse-gtw-fhir-trasform-it-fse-gtw-fhir-mapping-engine-1  | it-fse-ms-runner                 | running |
 | 3f1ef0f0fa94 | it-fse-gtw-fhir-trasform-mongo-1                           | mongo:4.2                        | running |
-|
+
 
 <br/>

@@ -1,4 +1,4 @@
-name: gtw-fhir-transform
+name: it-fse-gtw-container-fhir-transform
 services:
   mongo:
     image: docker.io/mongo:4.2
