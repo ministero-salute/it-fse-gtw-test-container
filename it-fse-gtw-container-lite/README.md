@@ -45,20 +45,24 @@ Al termine dell'operazione sarà stata creata una cartella `mongo-dump` nella ca
 
 Per avviare i container che compongono il Gateway è sufficiente posizionarsi da terminale nella directory contenente il file `docker-compose.yaml` e lanciare il comando
 
-    docker-compose up
+```bash
+docker compose up
+```
 
-Verranno create le immagini e messi in esecuzione i container che compongono il gateway.
+Verranno create (se necessario) le immagini ed eseguiti i container che compongono il Gateway.
 
 <br/>
 
 
-**N.B.** Il nome dei container generato è dipendente dal nome della directory in cui si trova il file docker-compose, in questo caso *it-fse-container-lite*
+**N.B.** Il nome dei container generati dipende dal nome della directory in cui si trova il file docker-compose.yaml, in questo caso *it-fse-container-lite*
 
 Potrebbero essere necessari **alcuni minuti** perché il sistema sia pronto, durante il primo avvio in particolare vengono scaricati e compilati i sorgenti e le librerie delle dipendenze dei microservizi, questo può richiedere parecchio tempo.
 
 <br/>
 
-Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8010 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. È possibile inoltre consultare lo swagger al seguente link http://localhost:8010/openapi/swagger-ui/index.html
+Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8010 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. 
+
+La documentazione OpenAPI (Swagger UI) è disponibile all’indirizzo: http://localhost:8010/openapi/swagger-ui/index.html. Aprendo questo URL dal browser è possibile esplorare e testare le API esposte dal Gateway.
 
 <br/>
 
@@ -72,10 +76,11 @@ L'output atteso dal seguente comando è il seguente:
 
 | CONTAINER ID | NAMES                                                      | IMAGE                            | STATE   |
 |--------------|------------------------------------------------------------|----------------------------------|---------|
-| f84330c03b5b | it-fse-gtw-container-lite-it-fse-gtw-status-check-1        | it-fse-ms-runner                 | running |
+| f84330c03b5b | it-fse-gtw-container-lite-it-fse-gtw-config-1              | it-fse-ms-runner                 | running |
 | 395d5024e63b | it-fse-gtw-container-lite-it-fse-gtw-dispatcher-1          | it-fse-ms-runner                 | running |
-| 2b33b4bf4504 | it-fse-gtw-container-lite-it-fse-gtw-fhir-mapping-engine-1 | it-fse-ms-runner                 | running |
+| f84330c03b5b | it-fse-gtw-container-lite-it-fse-gtw-status-check-1        | it-fse-ms-runner                 | running |
 | ba7aa381fb61 | it-fse-gtw-container-lite-it-fse-gtw-status-manager-1      | it-fse-ms-runner                 | running |
+| 2b33b4bf4504 | it-fse-gtw-container-lite-it-fse-gtw-fhir-mapping-engine-1 | it-fse-ms-runner                 | running |
 | cb102c0be90e | it-fse-gtw-container-lite-it-fse-gtw-validator-1           | it-fse-ms-runner                 | running |
 | 1de45c7e315c | it-fse-gtw-container-lite-it-fse-srv-log-ingestion-1       | it-fse-ms-runner                 | running |
 | 3f1ef0f0fa94 | it-fse-gtw-container-lite-mongo-1                          | mongo:4.2                        | running |

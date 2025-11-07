@@ -9,11 +9,14 @@ load_dotenv()
 
 # VARIABLES
 MONGO_DUMP_URL = getenv("MONGO_DUMP_URL")
-FILES = ["schema.json.gzip", 
-        "schematron.json.gzip",
-        "terminology.json.gzip",
-        "transform.json.gzip",
-        "engines.json.gzip"]
+FILES = [
+    "schema.json.gzip",
+    "schematron.json.gzip",
+    "terminology.json.gzip",
+    "transform.json.gzip",
+    "engines.json.gzip",
+    "config_data.json.gzip",
+]
 
 SCRIPT_DIR = path.dirname(path.abspath(__file__))
 FOLDER = path.join(SCRIPT_DIR, "../mongo-dump")
