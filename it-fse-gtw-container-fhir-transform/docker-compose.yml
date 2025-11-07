@@ -1,0 +1,67 @@
+name: gtw-fhir-transform
+services:
+  mongo:
+    image: docker.io/mongo:4.2
+    ports:
+      - '27888:27017'
+    volumes:
+      - ./mongo/:/docker-entrypoint-initdb.d/:ro
+      - ../mongo-dump:/var/lib/mongo/data
+    restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  
+  ##MICROSERVIZI
+  it-fse-gtw-config:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-gtw-config.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 8018
+    volumes: 
+      - mvn-cache:/root/.m2
+    restart: unless-stopped
+    ports:
+      - 8018:8018
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8018/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+
+  it-fse-gtw-fhir-mapping-engine:
+    image: it-fse-ms-runner
+    build:
+      context: ./../it-fse-ms-runner/
+    environment:
+      URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping-engine.git
+      BRANCH: ${CURRENT_BRANCH}
+      PORT: 8022
+    volumes: 
+      - mvn-cache:/root/.m2
+    restart: unless-stopped
+    ports:
+      - 8022:8022
+    depends_on:
+      it-fse-gtw-config:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
+      interval: 40s
+      retries: 20
+      start_period: 20s
+      timeout: 10s
+
+
+volumes:
+  mvn-cache:

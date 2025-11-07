@@ -2,16 +2,19 @@
 
 # _it-fse-gtw-test-container_
 
-In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale *lite* del **gateway** di FSE 2.0.
+In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale dell'engine che trasfomra file CDA in FHIR.
 
 La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad invocare i seguenti endpoint
-* POST `/documents/validation`: il servizio consentirà di validare il documento CDA2 fornito in input.
-* POST `/documents`: il servizio consentirà di trasformare il documento CDA2 fornito in input in Bundle FHIR.
-* GET `/status`: il servizio consentirà di conoscere lo stato della transazione fornendo in input il workflowInstanceId o il traceID.
+* GET `/status`: Consente di conoscere lo stato della transazione fornendo in input il workflowInstanceId o il traceID.
+* POST `/v1/documents/transform/stateless/{engineId}/{objectId}`: Il servizio genera un Bundle tramite il FHIR Mapping Engine. engineId: identificativo dell’engine configurato nel database; objectId: identificativo della configurazione/mapping associato alla specifica tipologia di file CDA in input.
+* GET `/v1/engine/status`: Restituisce lo stato corrente degli engine disponibili per la trasformazione dei file CDA.
+* GET `/v1/engine/refresh`: Aggiorna la lista degli engine disponibili nel database.
+
+**DISCLAIMER: Il json FHIR in output dal servizio di trasformazione non e' quello che verra' poi inserito all'interno del server.**
 
 <br/>
 
-[<img src="../img/container-lite.png" width="75%" style="display: block; margin: 0 auto" />](container-lite.png)
+[<img src="../img/container-fhir-trasform.png" width="75%" style="display: block; margin: 0 auto" />](container-fhir-trasform.png)
 
 <br/>
 
@@ -34,10 +37,8 @@ Successivamente, seguire i seguenti passaggi per la configurazione di Python:
 Prima di avviare i container bisogna effetturare il download dei file JSON utili al riempimento del database Mongo.
 
 Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-lite`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
-* `schema.json`
-* `schematron.json`
 * `transform.json`
-* `terminology.json`
+* `engines.json`
 
 Al termine dell'operazione sarà stata creata una cartella `mongo-dump` nella cartella root.
 
@@ -58,7 +59,7 @@ Potrebbero essere necessari **alcuni minuti** perché il sistema sia pronto, dur
 
 <br/>
 
-Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8010 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. È possibile inoltre consultare lo swagger al seguente link http://localhost:8010/openapi/swagger-ui/index.html
+Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8022 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. È possibile inoltre consultare lo swagger al seguente link http://localhost:8022/openapi/swagger-ui/index.html
 
 <br/>
 
@@ -72,15 +73,9 @@ L'output atteso dal seguente comando è il seguente:
 
 | CONTAINER ID | NAMES                                                      | IMAGE                            | STATE   |
 |--------------|------------------------------------------------------------|----------------------------------|---------|
-| f84330c03b5b | it-fse-gtw-container-lite-it-fse-gtw-status-check-1        | it-fse-ms-runner                 | running |
-| 395d5024e63b | it-fse-gtw-container-lite-it-fse-gtw-dispatcher-1          | it-fse-ms-runner                 | running |
-| 2b33b4bf4504 | it-fse-gtw-container-lite-it-fse-gtw-fhir-mapping-engine-1 | it-fse-ms-runner                 | running |
-| ba7aa381fb61 | it-fse-gtw-container-lite-it-fse-gtw-status-manager-1      | it-fse-ms-runner                 | running |
-| cb102c0be90e | it-fse-gtw-container-lite-it-fse-gtw-validator-1           | it-fse-ms-runner                 | running |
-| 1de45c7e315c | it-fse-gtw-container-lite-it-fse-srv-log-ingestion-1       | it-fse-ms-runner                 | running |
-| 3f1ef0f0fa94 | it-fse-gtw-container-lite-mongo-1                          | mongo:4.2                        | running |
-| 3fb5f91d61a3 | it-fse-gtw-container-lite-kafka-1                          | confluentinc/cp-kafka:6.2.1      | running |
-| b561e8c7a241 | it-fse-gtw-container-lite-zookeeper-1                      | confluentinc/cp-zookeeper:latest | running |
+| 2b33b4bf4504 | it-fse-gtw-fhir-transform-it-fse-gtw-config-1              | it-fse-ms-runner                 | running |
+| 2b33b4bf4504 | it-fse-gtw-fhir-trasform-it-fse-gtw-fhir-mapping-engine-1  | it-fse-ms-runner                 | running |
+| 3f1ef0f0fa94 | it-fse-gtw-fhir-trasform-mongo-1                           | mongo:4.2                        | running |
 |
 
 <br/>
