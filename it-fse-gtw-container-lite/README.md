@@ -87,6 +87,5 @@ L'output atteso dal seguente comando è il seguente:
 | 3f1ef0f0fa94 | it-fse-gtw-container-lite-mongo-1                          | mongo:4.2                        | running |
 | 3fb5f91d61a3 | it-fse-gtw-container-lite-kafka-1                          | confluentinc/cp-kafka:6.2.1      | running |
 | b561e8c7a241 | it-fse-gtw-container-lite-zookeeper-1                      | confluentinc/cp-zookeeper:latest | running |
-|
 
 <br/>
