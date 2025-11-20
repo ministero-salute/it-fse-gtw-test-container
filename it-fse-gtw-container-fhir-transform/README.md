@@ -5,7 +5,7 @@
 In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale dell'engine che trasfomra file CDA in FHIR.
 
 La seguente versione contiene il sottoinsieme minimo di microservizi necessari ad invocare i seguenti endpoint
-* POST `/v1/documents/transform/stateless/{engineId}/{objectId}`: Il servizio genera un Bundle tramite il FHIR Mapping Engine. engineId: identificativo dell’engine configurato nel database; objectId: identificativo della configurazione/mapping associato alla specifica tipologia di file CDA in input.
+* POST `/v1/documents/transform/stateless/{engineId}/{objectId}`: Il servizio genera un Bundle tramite il FHIR Mapping Engine. engineId: identificativo dell’engine configurato nel database; objectId: identificativo della configurazione/mapping associato alla specifica tipologia di file CDA in input. E' anche possibile passare informazioni aggiuntive riguardanti il campo DocumentReference, utilizzando il campo dedicato.
 * GET `/v1/engine/status`: Restituisce lo stato corrente degli engine disponibili per la trasformazione dei file CDA.
 * GET `/v1/engine/refresh`: Aggiorna la lista degli engine disponibili nel database.
 * GET `/status`: Consente di conoscere lo stato dell'applicazione
