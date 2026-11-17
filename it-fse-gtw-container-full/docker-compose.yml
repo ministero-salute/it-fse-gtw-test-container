@@ -1,579 +1,364 @@
-name: gtw-full
-services:
-  mongo:
-    image: docker.io/mongo:4.2
-    ports:
-      - '27888:27017'
-    volumes:
-      - ./mongo/:/docker-entrypoint-initdb.d/:ro
-      - ../mongo-dump:/var/lib/mongo/data
-    restart: unless-stopped
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
+# FSE 2.0 - ambiente locale completo (Gateway + EDS)
+#
+#   docker compose up -d --build        # build + avvio
+#   docker compose ps                   # stato / health
+#   docker compose logs -f <servizio>
+#   docker compose down                 # stop (i dati Mongo restano nel volume)
+#
+# Le variabili sono documentate in .env-sample (tutte hanno un default).
+name: fse2-full
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
-    restart: unless-stopped
+# ---------------------------------------------------------------------------
+# Template comuni
+# ---------------------------------------------------------------------------
+# Build dai repository locali: ${FSE_SRC_DIR}/<microservizio> (default: ../.., cioè la cartella FSE2).
+# Il Dockerfile è indicato relativamente al build context.
+x-build: &build
+  dockerfile: ${FSE_BUILDER_DOCKERFILE:-../it-fse-gtw-test-container/it-fse-gtw-container-full/builder/Dockerfile}
 
+x-ms-env: &ms-env
+  SPRING_PROFILES_ACTIVE: dev,container
+  TZ: Europe/Rome
+
+x-ms: &ms
+  restart: unless-stopped
+  networks: [fse2]
+  mem_limit: ${FSE_MS_MEM_LIMIT:-768m}
+  volumes:
+    - ./config/application-container.properties:/app/config/application-container.properties:ro
+  healthcheck:
+    test: ["CMD-SHELL", "curl -fsS http://localhost:$${SERVER_PORT}/status || exit 1"]
+    interval: 15s
+    timeout: 5s
+    retries: 10
+    start_period: 120s
+
+x-infra-deps: &infra-deps
+  mongo-seed:
+    condition: service_completed_successfully
   kafka:
-    image: confluentinc/cp-kafka:latest
-    ports:
-      - 29092:29092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 
+    condition: service_healthy
+
+# Microservizi gateway: partono dopo gtw-config (fornisce la configurazione runtime)
+x-gtw: &gtw
+  <<: *ms
+  profiles: [gtw]
+  depends_on:
+    <<: *infra-deps
+    it-fse-gtw-config:
+      condition: service_healthy
+
+x-eds: &eds
+  <<: *ms
+  profiles: [eds]
+  depends_on: *infra-deps
+
+services:
+  # =========================================================================
+  # INFRASTRUTTURA
+  # =========================================================================
+  mongo:
+    image: docker.io/library/mongo:8.0
     restart: unless-stopped
-    depends_on:
-      zookeeper:
-        condition: service_started
-  
-  kafka-ui:
-    image: provectuslabs/kafka-ui
+    networks: [fse2]
     ports:
-      - 8081:8081
+      - "27888:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  # Scarica i dump da it-fse-catalogs in ../mongo-dump (solo se mancanti)
+  mongo-dump:
+    image: docker.io/library/alpine:3.20
+    restart: "no"
+    networks: [fse2]
     environment:
-      - KAFKA_CLUSTERS_0_NAME=zookeeper:2181
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
-      - SERVER_PORT=8081
-    restart: unless-stopped
-    depends_on:
-      kafka:
-        condition: service_started
-  
-  # MICROSERVIZI EDS
-  
-  it-fse-srv-log-ingestion:
-    image: it-fse-ms-runner                      
-    build:
-      context: ./../it-fse-ms-runner/
+      MONGO_DUMP_URL: ${MONGO_DUMP_URL:-https://raw.githubusercontent.com/ministero-salute/it-fse-catalogs/main/mongo-dump}
+      MONGO_SEED_COLLECTIONS: ${MONGO_SEED_COLLECTIONS:-schema schematron terminology transform engines config_data}
+      MONGO_DUMP_REFRESH: ${MONGO_DUMP_REFRESH:-false}
+    volumes:
+      - ./mongo:/scripts:ro
+      - ../mongo-dump:/dump
+    command: ["sh", "/scripts/download.sh"]
+
+  # Importa i dump in FSE_GTW al primo avvio
+  mongo-seed:
+    image: docker.io/library/mongo:8.0
+    restart: "no"
+    networks: [fse2]
     environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-log-ingestion.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9097
-    volumes: 
-      - mvn-cache:/root/.m2
+      MONGO_SEED_COLLECTIONS: ${MONGO_SEED_COLLECTIONS:-schema schematron terminology transform engines config_data}
+      MONGO_SEED_FORCE: ${MONGO_SEED_FORCE:-false}
+    volumes:
+      - ./mongo:/scripts:ro
+      - ../mongo-dump:/dump:ro
+    entrypoint: ["bash", "/scripts/seed.sh"]
     depends_on:
       mongo:
         condition: service_healthy
+      mongo-dump:
+        condition: service_completed_successfully
+
+  kafka:
+    image: docker.io/apache/kafka:3.9.2
     restart: unless-stopped
+    networks: [fse2]
     ports:
-      - 9097:9097
+      - "29092:29092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,EXTERNAL://:29092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
     healthcheck:
-      test: "curl --fail --silent localhost:9097/status | grep UP || exit 1"
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
       interval: 10s
-      retries: 40
-      start_period: 15m
-      timeout: 15s
-  
-  it-fse-srv-dictionary:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-dictionary.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9088
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9088:9088
-    depends_on:
-      it-fse-srv-log-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9088/status | grep UP || exit 1"
-      interval: 20s
-      retries: 20
-      start_period: 20s
       timeout: 10s
-
-  it-fse-srv-fhir:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-fhir.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9086
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9086:9086
-    depends_on:
-      it-fse-srv-log-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9086/status | grep UP || exit 1"
-      interval: 20s
-      retries: 20
+      retries: 10
       start_period: 20s
-      timeout: 10s
 
-  it-fse-srv-syntax-rules-manager:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-syntax-rules-manager.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9100
-    volumes: 
-      - mvn-cache:/root/.m2
+  kafka-ui:
+    image: ghcr.io/kafbat/kafka-ui:v1.5.0
     restart: unless-stopped
+    networks: [fse2]
     ports:
-      - 9100:9100
-    depends_on:
-      it-fse-srv-log-ingestion:
-        condition: service_healthy
-      it-fse-gtw-config:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9100/status | grep UP || exit 1"
-      interval: 20s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-srv-semantic-rules-manager:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
+      - "8090:8080"
     environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-semantic-rules-manager.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9085
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9085:9085
+      KAFKA_CLUSTERS_0_NAME: fse2
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
     depends_on:
-      it-fse-srv-log-ingestion:
+      kafka:
         condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9085/status | grep UP || exit 1"
-      interval: 20s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
 
-  it-fse-datarepo-fhir-server:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-datarepo-fhir-server.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8080
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8080:8080
-    depends_on:
-      it-fse-srv-log-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail localhost:8080/fhir/metadata | grep \"status\" || exit 1"
-      interval: 20s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-srv-query:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-query.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9091
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9091:9091
-    depends_on:
-      it-fse-srv-log-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9091/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-  
-  it-fse-datarepo-data-quality:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-datarepo-data-quality.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9093
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9093:9093
-    depends_on:
-      it-fse-srv-query:
-        condition: service_healthy
-      it-fse-datarepo-fhir-server:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9093/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-datarepo-processor:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-datarepo-processor.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9089
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9089:9089
-    depends_on:
-      it-fse-srv-query:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9089/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-srv-ingestion:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-srv-ingestion.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 9087
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 9087:9087
-    depends_on:
-      it-fse-srv-query:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:9087/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  # MICROSERVIZI GATEWAY
-
-  it-fse-gtw-rules-manager:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-rules-manager.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8011
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8011:8011
-    depends_on:
-      it-fse-srv-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8011/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-gtw-eds-client:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-eds-client.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8021
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8021:8021
-    depends_on:
-      it-fse-srv-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8021/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
+  # =========================================================================
+  # MICROSERVIZI GATEWAY  (profilo "gtw")
+  # =========================================================================
   it-fse-gtw-config:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-config.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8018
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8018:8018
-    depends_on:
-      it-fse-srv-ingestion:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8018/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
+    <<: *ms
+    profiles: [gtw]
+    depends_on: *infra-deps
+    image: fse2/it-fse-gtw-config:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-config" }
+    environment: { <<: *ms-env, SERVER_PORT: 8018 }
+    ports: ["8018:8018"]
 
-  it-fse-gtw-ini-client:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-ini-client.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8020
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8020:8020
-    depends_on:
-      it-fse-gtw-config:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8020/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-      
+  it-fse-gtw-dispatcher:
+    <<: *gtw
+    image: fse2/it-fse-gtw-dispatcher:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-dispatcher" }
+    environment: { <<: *ms-env, SERVER_PORT: 8010 }
+    ports: ["8010:8010"]
+
   it-fse-gtw-validator:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-validator.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8012
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8012:8012
-    depends_on:
-      it-fse-gtw-config:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8012/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
+    <<: *gtw
+    image: fse2/it-fse-gtw-validator:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-validator" }
+    environment: { <<: *ms-env, SERVER_PORT: 8012 }
+    ports: ["8012:8012"]
 
   it-fse-gtw-status-manager:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-status-manager.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8013
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8013:8013
-    depends_on:
-      it-fse-gtw-config:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8013/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-gtw-garbage:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-garbage.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8019
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8019:8019
-    depends_on:
-      it-fse-gtw-status-manager:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8019/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-gtw-status-check:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-status-check.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8017
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8017:8017
-    depends_on:
-      it-fse-gtw-status-manager:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8017/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-gtw-fhir-mapping-engine:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-fhir-mapping-engine.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8022
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8022:8022
-    depends_on:
-      it-fse-gtw-rules-manager:
-        condition: service_healthy
-      it-fse-gtw-config:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8022/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
-
-  it-fse-gtw-publisher:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-publisher.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8016
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8016:8016
-    depends_on:
-      it-fse-gtw-eds-client:
-        condition: service_healthy
-      it-fse-gtw-status-manager:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8016/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
+    <<: *gtw
+    image: fse2/it-fse-gtw-status-manager:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-status-manager" }
+    environment: { <<: *ms-env, SERVER_PORT: 8013 }
+    ports: ["8013:8013"]
 
   it-fse-gtw-indexer:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-indexer.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8015
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8015:8015
-    depends_on:
-      it-fse-gtw-publisher:
-        condition: service_healthy
-      it-fse-gtw-config:
-        condition: service_healthy
+    <<: *gtw
+    image: fse2/it-fse-gtw-indexer:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-indexer" }
+    environment: { <<: *ms-env, SERVER_PORT: 8015 }
+    ports: ["8015:8015"]
+
+  it-fse-gtw-publisher:
+    <<: *gtw
+    image: fse2/it-fse-gtw-publisher:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-publisher" }
+    environment: { <<: *ms-env, SERVER_PORT: 8016 }
+    ports: ["8016:8016"]
+
+  it-fse-gtw-status-check:
+    <<: *gtw
+    image: fse2/it-fse-gtw-status-check:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-status-check" }
+    environment: { <<: *ms-env, SERVER_PORT: 8017 }
+    ports: ["8017:8017"]
+
+  it-fse-gtw-garbage:
+    <<: *gtw
+    image: fse2/it-fse-gtw-garbage:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-garbage" }
+    environment: { <<: *ms-env, SERVER_PORT: 8019 }
+    ports: ["8019:8019"]
+
+  it-fse-gtw-ini-client:
+    <<: *gtw
+    image: fse2/it-fse-gtw-ini-client:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-ini-client" }
+    environment: { <<: *ms-env, SERVER_PORT: 8020 }
+    ports: ["8020:8020"]
+
+  it-fse-gtw-eds-client:
+    <<: *gtw
+    image: fse2/it-fse-gtw-eds-client:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-eds-client" }
+    environment: { <<: *ms-env, SERVER_PORT: 8021 }
+    ports: ["8021:8021"]
+
+  it-fse-gtw-fhir-mapping-engine:
+    <<: *gtw
+    image: fse2/it-fse-gtw-fhir-mapping-engine:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-fhir-mapping-engine" }
+    environment: { <<: *ms-env, SERVER_PORT: 8022 }
+    mem_limit: ${FSE_MAPPING_MEM_LIMIT:-1536m}   # carica in memoria gli engine FHIR
+    ports: ["8022:8022"]
+
+  it-fse-gtw-notifier:
+    <<: *gtw
+    image: fse2/it-fse-gtw-notifier:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-notifier" }
+    environment: { <<: *ms-env, SERVER_PORT: 8084 }
+    ports: ["8084:8084"]
+
+  # Porta 9025: la 9015 del profilo dev collide con it-fse-uar-srv-notifier
+  it-fse-gtw-log-collector:
+    <<: *gtw
+    image: fse2/it-fse-gtw-log-collector:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-log-collector" }
+    environment: { <<: *ms-env, SERVER_PORT: 9025 }
+    ports: ["9025:9025"]
+
+  it-fse-gtw-fhir-validator:
+    <<: *gtw
+    image: fse2/it-fse-gtw-fhir-validator:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-gtw-fhir-validator" }
+    environment: { <<: *ms-env, SERVER_PORT: 9099 }
+    mem_limit: ${FSE_MAPPING_MEM_LIMIT:-1536m}   # carica in memoria i package FHIR
+    ports: ["9099:9099"]
+
+  it-fse-srv-log-ingestion:
+    <<: *gtw
+    image: fse2/it-fse-srv-log-ingestion:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-log-ingestion" }
+    environment: { <<: *ms-env, SERVER_PORT: 9097 }
+    ports: ["9097:9097"]
+
+  # =========================================================================
+  # MICROSERVIZI EDS  (profilo "eds")
+  # =========================================================================
+  it-fse-datarepo-uar-fhir-server-1:
+    <<: *eds
+    image: fse2/it-fse-datarepo-uar-fhir-server-1:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-datarepo-uar-fhir-server-1" }
+    environment: { <<: *ms-env, SPRING_PROFILES_ACTIVE: dev, SERVER_PORT: 8081 }
+    mem_limit: ${FSE_FHIR_MEM_LIMIT:-1536m}
+    ports: ["8081:8081"]
     healthcheck:
-      test: "curl --fail --silent localhost:8015/status | grep UP || exit 1"
-      interval: 40s
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8081/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 5s
       retries: 20
-      start_period: 20s
-      timeout: 10s
-  
-  it-fse-gtw-dispatcher:
-    image: it-fse-ms-runner
-    build:
-      context: ./../it-fse-ms-runner/
-    environment:
-      URL: ${REPO_BASE_URL}/it-fse-gtw-dispatcher.git
-      BRANCH: ${CURRENT_BRANCH}
-      PORT: 8010
-    volumes: 
-      - mvn-cache:/root/.m2
-    restart: unless-stopped
-    ports:
-      - 8010:8010
-    depends_on:
-      it-fse-gtw-indexer:
-        condition: service_healthy
-    healthcheck:
-      test: "curl --fail --silent localhost:8010/status | grep UP || exit 1"
-      interval: 40s
-      retries: 20
-      start_period: 20s
-      timeout: 10s
+      start_period: 180s
+
+  it-fse-ana-validator:
+    <<: *eds
+    image: fse2/it-fse-ana-validator:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-ana-validator" }
+    environment: { <<: *ms-env, SERVER_PORT: 9008 }
+    ports: ["9008:9008"]
+
+  it-fse-srv-broker:
+    <<: *eds
+    image: fse2/it-fse-srv-broker:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-broker" }
+    environment: { <<: *ms-env, SERVER_PORT: 9009 }
+    ports: ["9009:9009"]
+
+  it-fse-srv-uar-dispatcher:
+    <<: *eds
+    image: fse2/it-fse-srv-uar-dispatcher:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-uar-dispatcher" }
+    environment: { <<: *ms-env, SERVER_PORT: 9010 }
+    ports: ["9010:9010"]
+
+  it-fse-srv-uar-ingestion:
+    <<: *eds
+    image: fse2/it-fse-srv-uar-ingestion:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-uar-ingestion" }
+    environment: { <<: *ms-env, SERVER_PORT: 9011 }
+    ports: ["9011:9011"]
+
+  it-fse-datarepo-uar-data-processor:
+    <<: *eds
+    image: fse2/it-fse-datarepo-uar-data-processor:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-datarepo-uar-data-processor" }
+    environment: { <<: *ms-env, SERVER_PORT: 9012 }
+    ports: ["9012:9012"]
+
+  it-fse-datarepo-uar-data-quality:
+    <<: *eds
+    image: fse2/it-fse-datarepo-uar-data-quality:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-datarepo-uar-data-quality" }
+    environment: { <<: *ms-env, SERVER_PORT: 9013 }
+    ports: ["9013:9013"]
+
+  it-fse-srv-uar-query:
+    <<: *eds
+    image: fse2/it-fse-srv-uar-query:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-uar-query" }
+    environment: { <<: *ms-env, SERVER_PORT: 9014 }
+    ports: ["9014:9014"]
+
+  it-fse-uar-srv-notifier:
+    <<: *eds
+    image: fse2/it-fse-uar-srv-notifier:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-uar-srv-notifier" }
+    environment: { <<: *ms-env, SERVER_PORT: 9015 }
+    ports: ["9015:9015"]
+
+  it-fse-eds-garbage:
+    <<: *eds
+    image: fse2/it-fse-eds-garbage:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-eds-garbage" }
+    environment: { <<: *ms-env, SERVER_PORT: 9016 }
+    ports: ["9016:9016"]
+
+  it-fse-srv-data-protection:
+    <<: *eds
+    image: fse2/it-fse-srv-data-protection:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-srv-data-protection" }
+    environment: { <<: *ms-env, SERVER_PORT: 10001 }
+    ports: ["10001:10001"]
+
+  # Richiede Hive/Kerberos/S3 (infrastruttura Sogei): escluso di default,
+  # si attiva con COMPOSE_PROFILES=gtw,eds,facade
+  it-fse-udp-fhir-facade:
+    <<: *eds
+    profiles: [facade]
+    image: fse2/it-fse-udp-fhir-facade:local
+    build: { <<: *build, context: "${FSE_SRC_DIR:-../..}/it-fse-udp-fhir-facade" }
+    environment: { <<: *ms-env, SERVER_PORT: 9080 }
+    ports: ["9080:9080"]
+
+networks:
+  fse2:
 
 volumes:
-  mvn-cache:
+  mongo-data:
+  kafka-data:

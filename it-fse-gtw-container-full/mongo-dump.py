@@ -15,7 +15,7 @@ FILES = [
     "terminology.json.gzip",
     "transform.json.gzip",
     "engines.json.gzip",
-    "config_data.json.gzip",
+    #"config_data.json.gzip",
 ]
 
 SCRIPT_DIR = path.dirname(path.abspath(__file__))

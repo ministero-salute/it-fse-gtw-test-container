@@ -1,97 +1,143 @@
 # Fascicolo Sanitario 2.0
 
-# _it-fse-gtw-test-container_
+# _it-fse-gtw-container-full_
 
-In questa directory è presente un file `docker-compose` che consente di avviare un'istanza locale *full* del **Gateway** e **EDS** di FSE 2.0.
+`docker-compose` per avviare in locale un'istanza **completa** di **Gateway** ed **EDS** di FSE 2.0.
 
-La seguente versione contiene tutti i microservizi di **gateway** ed **eds** ad oggi sviluppati
+## Requisiti
 
-[<img src="../img/container-full-gtw.png" width="75%" style="display: block; margin: 0 auto" />](container-full-gtw.png)
+* Docker (con Compose v2) **oppure** Podman con `docker-compose`
+* ~20 GiB di RAM assegnati a Docker/Podman per l'intero stack (limiti per container: `FSE_*_MEM_LIMIT`); con meno RAM avviare i profili `gtw` ed `eds` separatamente
+* git con accesso ai repository `ministero-salute` (alcuni sono privati)
 
-[<img src="../img/container-full-eds.png" width="75%" style="display: block; margin: 0 auto" />](container-full-eds.png)
+Non serve Python né Maven sull'host.
 
-<br/>
+## Avvio rapido
 
-## Preparazione:
+```bash
+./setup-repos.sh             # clona i repository mancanti accanto a it-fse-gtw-test-container
+cp .env-sample .env          # opzionale: tutte le variabili hanno un default
+docker compose up -d --build
+docker compose ps            # attendere che i servizi siano "healthy"
+```
 
-Per prima cosa è **necessario** creare un file `.env` copiando il file `.env-sample` presente nella directory corrente. 
-Il file è opportunamente inizializzato con il `REPO_BASE_URL` e il `CURRENT_BRANCH` da cui scaricare il codice dei microservizi del gateway.
+Le immagini vengono compilate **dai repository locali** (`FSE_SRC_DIR`, default `../..`,
+cioè la cartella che contiene `it-fse-gtw-test-container`), usando il branch in checkout
+in ciascun repository. Le modifiche locali sono quindi incluse nella build.
 
-Ad esempio:
+Struttura attesa:
 
-    REPO_BASE_URL="https://github.com/ministero-salute"
-    CURRENT_BRANCH=main
+```
+FSE2/
+├── it-fse-gtw-test-container/it-fse-gtw-container-full/   <- qui
+├── it-fse-gtw-config/
+├── it-fse-gtw-dispatcher/
+└── ...
+```
 
-Successivamente, seguire i seguenti passaggi per la configurazione di Python:
+La prima build richiede tempo (download delle dipendenze Maven). La cache Maven è condivisa
+tra tutte le build, quindi le successive sono molto più rapide; un servizio non modificato
+non viene ricompilato.
 
-1. Installare [Python](https://www.python.org/downloads/)
-2. Aprire il prompt di comandi e digitare `pip install python-dotenv`
+Al primo avvio vengono anche:
+1. scaricati i dump da [it-fse-catalogs](https://github.com/ministero-salute/it-fse-catalogs) in `../mongo-dump` (servizio `mongo-dump`)
+2. importati in `FSE_GTW` (servizio `mongo-seed`, eseguito una sola volta)
 
-Prima di avviare i container bisogna effetturare il download dei file JSON utili al riempimento del database Mongo.
+## Architettura
 
-Per fare questo bisogna andare nella cartella della versione scelta (Es. `it-fse-container-lite`) ed eseguire lo script python `mongo-dump.py`. Lo script effettuerà il download della versione più aggiornata dei seguenti file:
-* `schema.json`
-* `schematron.json`
-* `transform.json`
-* `terminology.json`
+| Componente | Descrizione |
+|---|---|
+| `builder/Dockerfile` | Immagine unica per tutti i microservizi: build multi-stage (`mvn package` dai sorgenti locali), runtime JRE 21, utente non-root |
+| `setup-repos.sh` | Clona i repository mancanti (`BRANCH=...`, `--pull` per aggiornarli) |
+| `config/application-container.properties` | Profilo Spring `container` montato in `/app/config`: sostituisce i `localhost` del profilo `dev` con i nomi dei servizi |
+| `mongo/download.sh`, `mongo/seed.sh` | Download e import dei dump MongoDB |
 
-Al termine dell'operazione sarà stata creata una cartella `mongo-dump` nella cartella root.
+Ogni microservizio gira con `SPRING_PROFILES_ACTIVE=dev,container` e `SERVER_PORT`; l'health-check usa `/status`.
 
-## Avvio:
+## Servizi
 
-Per avviare i container che compongono il Gateway è sufficiente posizionarsi da terminale nella directory contenente il file `docker-compose.yaml` e lanciare il comando 
+### Infrastruttura
 
-    docker-compose up
+| Servizio | Porta host |
+|---|---|
+| mongo | 27888 |
+| kafka (KRaft, senza Zookeeper) | 29092 |
+| kafka-ui | [8090](http://localhost:8090) |
 
-Verranno create le immagini e messi in esecuzione i container che compongono il gateway.
+### Gateway (profilo `gtw`)
 
-<br/>
+| Servizio | Porta | Servizio | Porta |
+|---|---|---|---|
+| it-fse-gtw-config | 8018 | it-fse-gtw-ini-client | 8020 |
+| it-fse-gtw-dispatcher | 8010 | it-fse-gtw-eds-client | 8021 |
+| it-fse-gtw-validator | 8012 | it-fse-gtw-fhir-mapping-engine | 8022 |
+| it-fse-gtw-status-manager | 8013 | it-fse-gtw-notifier | 8084 |
+| it-fse-gtw-indexer | 8015 | it-fse-gtw-log-collector | 9025 |
+| it-fse-gtw-publisher | 8016 | it-fse-gtw-fhir-validator | 9099 |
+| it-fse-gtw-status-check | 8017 | it-fse-srv-log-ingestion | 9097 |
+| it-fse-gtw-garbage | 8019 | | |
 
+I microservizi gateway partono dopo che `it-fse-gtw-config` è healthy.
 
-**N.B.** Il nome dei container generato è dipendente dal nome della directory in cui si trova il file docker-compose, in questo caso *it-fse-container-full*
+### EDS (profilo `eds`)
 
-Potrebbero essere necessari **alcuni minuti** perché il sistema sia pronto, durante il primo avvio in particolare vengono scaricati e compilati i sorgenti e le librerie delle dipendenze dei microservizi, questo può richiedere parecchio tempo.
+| Servizio | Porta | Servizio | Porta |
+|---|---|---|---|
+| it-fse-datarepo-uar-fhir-server-1 | 8081 | it-fse-datarepo-uar-data-quality | 9013 |
+| it-fse-ana-validator | 9008 | it-fse-srv-uar-query | 9014 |
+| it-fse-srv-broker | 9009 | it-fse-uar-srv-notifier | 9015 |
+| it-fse-srv-uar-dispatcher | 9010 | it-fse-eds-garbage | 9016 |
+| it-fse-srv-uar-ingestion | 9011 | it-fse-srv-data-protection | 10001 |
+| it-fse-datarepo-uar-data-processor | 9012 | it-fse-udp-fhir-facade *(profilo `facade`)* | 9080 |
 
-<br/>
+`it-fse-udp-fhir-facade` richiede Hive/Kerberos/S3 e per questo è escluso di default.
 
-Una volta avviato sarà possibile utilizzare come endpoint di collegamento http://localhost:8010 corrispondente all'indirizzo del microservizio dispatcher incaricato di esporre i servizi. È possibile inoltre consultare lo swagger al seguente link http://localhost:8080/fhir/swagger-ui/.
+Esclusi volutamente: catalogs, accreditation, rules-manager, semantic/syntax rules manager, terminology server, uat, support.
 
-<br/>
+## Uso
 
-## Troubleshooting:
+```bash
+COMPOSE_PROFILES=gtw docker compose up -d --build     # solo gateway
+COMPOSE_PROFILES=eds docker compose up -d --build     # solo EDS
+docker compose up -d --build it-fse-gtw-dispatcher    # un servizio e le sue dipendenze
+docker compose up -d --build it-fse-gtw-validator    # ricompila dopo una modifica al codice
+./setup-repos.sh --pull                               # aggiorna tutti i repository
+docker compose logs -f it-fse-gtw-dispatcher
+docker compose down                                   # stop, i dati restano
+docker compose down -v                                # stop e cancella Mongo/Kafka
+```
 
-Assicurarsi che tutti i container siano instato **running** tramite GUI di `Docker Desktop` o tramite il comando
-    
-    docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.State}}"
+Endpoint principale: http://localhost:8010 (dispatcher).
 
-L'output atteso dal seguente comando è il seguente:
+### Variabili (`.env`)
 
-| CONTAINER ID | NAMES                                                     | IMAGE                            | STATE   |
-|--------------|-----------------------------------------------------------|----------------------------------|---------|
-| 3b0d6d4cdfeb | it-fse-container-full-it-fse-gtw-dispatcher-1             | it-fse-ms-runner                 | running |
-| 3425ded08129 | it-fse-container-full-it-fse-gtw-indexer-1                | it-fse-ms-runner                 | running |
-| b6fe61f8793e | it-fse-container-full-it-fse-gtw-status-check-1           | it-fse-ms-runner                 | running |
-| dcd93eda8566 | it-fse-container-full-it-fse-gtw-publisher-1              | it-fse-ms-runner                 | running |
-| 68b458bfede1 | it-fse-container-full-it-fse-gtw-garbage-1                | it-fse-ms-runner                 | running |
-| 2a52e676ec95 | it-fse-container-full-it-fse-gtw-validator-1              | it-fse-ms-runner                 | running |
-| ebd5824bbf3f | it-fse-container-full-it-fse-gtw-ini-client-1             | it-fse-ms-runner                 | running |
-| 2d33e7f0b44f | it-fse-container-full-it-fse-gtw-status-manager-1         | it-fse-ms-runner                 | running |
-| b4c7863fbe97 | it-fse-container-full-it-fse-gtw-fhir-mapping-engine-1    | it-fse-ms-runner                 | running |
-| 50dba0237700 | it-fse-container-full-it-fse-gtw-fhir-mapping-1           | it-fse-ms-runner                 | running |
-| 877bdb4a2748 | it-fse-container-full-it-fse-gtw-eds-client-1             | it-fse-ms-runner                 | running |
-| d5f08febd5ba | it-fse-container-full-it-fse-gtw-config-1                 | it-fse-ms-runner                 | running |
-| 856930c725e4 | it-fse-container-full-it-fse-gtw-rules-manager-1          | it-fse-ms-runner                 | running |
-| d8ebacdb4f2e | it-fse-container-full-it-fse-datarepo-processor-1         | it-fse-ms-runner                 | running |
-| fbfc3acf7e16 | it-fse-container-full-it-fse-datarepo-data-quality-1      | it-fse-ms-runner                 | running |
-| a6601b8722bb | it-fse-container-full-it-fse-srv-ingestion-1              | it-fse-ms-runner                 | running |
-| f4a15cfc0439 | it-fse-container-full-it-fse-srv-dictionary-1             | it-fse-ms-runner                 | running |
-| ef7f953e30b8 | it-fse-container-full-it-fse-datarepo-fhir-server-1       | it-fse-ms-runner                 | running |
-| 3953607153d9 | it-fse-container-full-it-fse-srv-fhir-1                   | it-fse-ms-runner                 | running |
-| 4896820f5885 | it-fse-container-full-it-fse-srv-syntax-rules-manager-1   | it-fse-ms-runner                 | running |
-| f6c82592adfd | it-fse-container-full-it-fse-srv-semantic-rules-manager-1 | it-fse-ms-runner                 | running |
-| ccaaf49acd24 | it-fse-container-full-it-fse-srv-query-1                  | it-fse-ms-runner                 | running |
-| 6046edbee2c1 | it-fse-container-full-it-fse-srv-log-ingestion-1          | it-fse-ms-runner                 | running |
-| 434b96967cb2 | it-fse-container-full-kafka-ui-1                          | provectuslabs/kafka-ui           | running |
-| 8a493f0c40d1 | it-fse-container-full-mongo-1                             | mongo:4.2                        | running |
-| 06da0d6edf65 | it-fse-container-full-zookeeper-1                         | confluentinc/cp-zookeeper:latest | running |
-| 72929eb90052 | it-fse-container-full-kafka-1                             | confluentinc/cp-kafka:latest     | running |
+| Variabile | Default | Descrizione |
+|---|---|---|
+| `COMPOSE_PROFILES` | `gtw,eds` | gruppi da avviare (`gtw`, `eds`, `facade`) |
+| `FSE_SRC_DIR` | `../..` | cartella con i repository dei microservizi |
+| `MONGO_DUMP_URL` | catalogs `main/mongo-dump` | origine dei dump |
+| `MONGO_SEED_COLLECTIONS` | `schema schematron terminology transform engines config_data` | collection importate |
+| `MONGO_DUMP_REFRESH` | `false` | `true` riscarica i dump |
+| `MONGO_SEED_FORCE` | `false` | `true` reimporta le collection |
+| `COMPOSE_PARALLEL_LIMIT` | `2` | build/avvii in parallelo (ogni build Maven usa ~1.5 GiB) |
+| `FSE_MS_MEM_LIMIT` / `FSE_FHIR_MEM_LIMIT` / `FSE_MAPPING_MEM_LIMIT` | `768m` / `1536m` / `1536m` | limite di memoria per container |
+
+Per aggiornare i dati Mongo: `MONGO_DUMP_REFRESH=true MONGO_SEED_FORCE=true docker compose up mongo-seed`.
+
+## Note
+
+* Le porte host coincidono con quelle del profilo `dev`: fermare i microservizi avviati da IDE e altri Mongo/Kafka locali su 27888/29092 prima dell'avvio.
+* `it-fse-gtw-log-collector` è esposto su **9025** (nel profilo dev usa 9015, che collide con `it-fse-uar-srv-notifier`).
+* L'SSL verso INI è disabilitato (`ini.client.enable-ssl=false`) perché il certificato di autenticazione non è nei repository.
+
+## Troubleshooting
+
+```bash
+docker compose ps -a                       # stato e health
+docker compose logs --tail=200 <servizio>  # errori di avvio
+docker compose up mongo-seed               # rieseguire il seed
+```
+
+Una build terminata con `exit status 137` è stata interrotta per memoria insufficiente: ridurre `COMPOSE_PARALLEL_LIMIT` o aumentare la RAM della VM Docker/Podman.
+
+Pulizia completa: `docker compose down -v --rmi local`.
